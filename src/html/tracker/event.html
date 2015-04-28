@@ -1,0 +1,9 @@
+<div ng-controller="EventController">
+
+  <div id="event-editor" contentEditable="true" event-editor></div>
+
+  <button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()">Cancel</button>
+  <button ng-disabled="submitting" ng-disabled="exercise_type" ng-click="submit()" type="button" class="button green-button two-buttons">
+    {{submitting | then:"Saving...":"Confirm"}}
+  </button>
+</div>

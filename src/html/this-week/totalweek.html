@@ -1,0 +1,30 @@
+<div>
+	<h3>Total This Week</h3>
+	<div class="averagePerDayMeasure row">
+		<gb-sparkline ds="exerciseDataSeries" id="exerciseSpark" class="col-md-4 exercise event-chart"></gb-sparkline>
+		<span ng-show="isDefined('exerciseTotal')" class="col-md-8 exercise">
+			<span class="value">{{exerciseTotal}}</span>
+			<span class="titleText">Exercise</span></span>
+		<span ng-show="!isDefined('exerciseTotal')" class='col-md-8'>
+			No exercise data for this week
+		</span>
+	</div>
+	<div class="averagePerDayMeasure row">
+		<gb-sparkline ds="alcoholDataSeries" id="alcoholSpark" class="col-md-4 alcohol event-chart"></gb-sparkline>
+		<span ng-show="isDefined('alcoholTotal')" class="col-md-8 alcohol">
+			<span class="value">{{alcoholTotal}}</span>
+			<span class="titleText">Alcohol</span></span>
+		<span ng-show="!isDefined('alcoholTotal')" class='col-md-8'>
+			No alcohol data for this week
+		</span>
+	</div>
+	<div class="averagePerDayMeasure row">
+		<gb-sparkline ds="socialDataSeries" id="socialSpark" class="col-md-4 social event-chart"></gb-sparkline>
+		<span ng-show="isDefined('socialTotal')" class="col-md-8 social">
+			<span class="value">{{socialTotal}}</span>
+			<span class="titleText">Social</span></span>
+		<span ng-show="!isDefined('socialTotal')" class='col-md-8'>
+			No social data for this week
+		</span>
+	</div>
+</div>

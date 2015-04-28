@@ -1,0 +1,36 @@
+<div class="row diaryEntry">
+	<div class="col-md-3 text-right">
+		<span class="diaryDay">{{entry.entryDay | dateToDayString}}</span>
+		<span class="diaryDayNum">{{entry.entryDay | dateToDayNumber}}</span>
+	</div>
+	<div class="col-md-9">
+		<!--<span ng-hide="entry.entryContent === null" class="diaryEntryContent" ng-bind-html="entry.entryContentHtml">
+		</span>
+		<span ng-hide="entry.entryContent !== null" class="diaryEntryContent">
+			Type here to enter an event
+		</span>-->
+			<diary-event-editor></diary-event-editor>
+			<div class='diaryEntryButtons' ng-show='entry.editing === true'>
+				<div class="tags" ng-hide="suggestedTags.length > -1">
+					<ul>
+						<li ng-repeat="tag in tags | limitTo:10">
+							<a class="tag" ng-click="insert(' #' + tag + ' ')">#{{tag}}</a>&nbsp;
+						</li>
+					</ul>
+				</div>
+				<div class="tags" ng-show="suggestedTags.length > -1">
+					<ul>
+						<li ng-repeat="tag in suggestedTags | limitTo:10">
+							<a ng-click="complete(tag)"><span class="tag">#{{tag}}</span></a>&nbsp;
+						</li>
+					</ul>
+					<ul ng-show="suggestedTags.length == 0">
+						<li>No matching tags</li>
+					</ul>
+				</div>
+				<button class='button red-button' ng-click='cancelEdit()'>Cancel</button>
+				<button class='button green-button' ng-click='saveEdit()'>Save</button>
+			</div>
+		</div>
+	</div>
+</div>

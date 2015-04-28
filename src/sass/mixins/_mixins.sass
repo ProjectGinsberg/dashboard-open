@@ -1,0 +1,115 @@
+=clearfix
+  *zoom: 1
+  &:before,
+  &:after
+    display: table
+    content: ""
+  &:after
+    clear: both
+
+=box-sizing($box-model)
+  -webkit-box-sizing: $box-model
+  -moz-box-sizing: $box-model
+  box-sizing: $box-model
+
+=box-shadow($args)
+  -webkit-box-shadow: $args
+  -moz-box-shadow: $args
+  box-shadow: $args
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  border-radius: $radius
+
+=transition($args)
+  -webkit-transition: $args
+  -moz-transition: $args
+  -ms-transition: $args
+  -o-transition: $args
+  transition: $args
+
+=opacity($args)
+  -webkit-opacity: $args
+  -moz-opacity: $args
+  -ms-opacity: $args
+  -o-opacity: $args
+  opacity: $args
+  $IEValue: $args*100
+  //-ms-filter: #{"progid:DXImageTransform.Microsoft.Alpha(Opacity='#{$IEValue}')"}
+  filter: alpha(opacity=$IEValue)
+
+=clear-gradient
+  background-image: none
+  background-image: none
+  background-image: none
+  background-image: none
+  background-image: none
+  background-image: none
+  background-repeat: no-repeat
+  filter: none
+
+=gradient-maker($from, $to)
+  background-color: $to
+  background: -webkit-gradient(linear, left center, right center, from($from), to($to))
+  background: -moz-linear-gradient(left, $from 0%, $to 100%)
+  background: -ms-linear-gradient(left, $from 0%, $to 100%)
+  background: -o-linear-gradient(left, $from 0%, $to 100%)
+  //filter: #{"progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}', GradientType=1 )"}
+  zoom: 1
+
+=gradient-vertical-maker($from, $to)
+  background: $from
+  // Old browsers
+  background: -moz-linear-gradient(top, $from 0%, $to 100%)
+  // FF3.6+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $from), color-stop(100%, $to))
+  // Chrome,Safari4+
+  background: -webkit-linear-gradient(top, $from 0%, $to 100%)
+  // Chrome10+,Safari5.1+
+  background: -o-linear-gradient(top, $from 0%, $to 100%)
+  // Opera 11.10+
+  background: -ms-linear-gradient(top, $from 0%, $to 100%)
+  // IE10+
+  background: linear-gradient(to bottom, $from 0%, $to 100%)
+  // W3C
+  //filter: #{"progid:DXImageTransform.Microsoft.gradient startColorStr='#{$from}', EndColorStr='#{$to}', GradientType=0 )"}
+  zoom: 1
+  // IE6-9
+  -webkit-box-shadow: none
+  box-shadow: none
+
+=pill-maker($radius: 8px)
+  margin: 0 0 0 0
+  text-align: center
+  border: 1px solid white
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  border-radius: $radius
+
+=blue-button-pill
+  +pill-maker
+  text-decoration: none
+  font-size: 18px
+  color: white
+  background-color: $blue
+  border: 2px solid $blue
+  box-shadow: 0px 5px 5px $blueShadow
+
+=menu-image-placer
+  background-size: 16px 16px
+  background-repeat: no-repeat
+  background-position: 1% 50%
+
+=striped-bg($bg-color: #ccc, $darken-amount: 5%, $stripe-color: darken($bg-color, $darken-amount))
+  background-color: $bg-color
+  background-image: linear-gradient(-45deg, $stripe-color 25%, transparent 25%, transparent 50%, $stripe-color 50%, $stripe-color 75%, transparent 75%, transparent)
+  background-image: -webkit-linear-gradient(-45deg, $stripe-color 25%, transparent 25%, transparent 50%, $stripe-color 50%, $stripe-color 75%, transparent 75%, transparent)
+  background-size: 40px 40px
+
+=animation($args)
+  -webkit-animation: $args
+  -moz-animation: $args
+  -ms-animation: $args
+  animation: $args

@@ -1,0 +1,22 @@
+<div ng-controller="LoginDialogController">
+	<h2>Please sign in to continue...</h2>
+	<p class='loginError'>{{error}}</p>
+	<form ng-submit="submit()" autofill-fix>
+		<fieldset>
+		<legend style="display: none;">Credentials</legend>
+			<div class="form-group">
+				<label for="email">Email Address</label>
+				<input type="email" class="form-control" name="email" placeholder="Your email address" ng-model="email" />
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="password" placeholder="Your password" ng-model="password" />
+			</div>
+			<div class="form-group">
+				<label style="font-weight:normal;"><input checked="checked" style="margin:0 4px 4px 0;" type="checkbox" name="RememberMe" value="True" /> Remember me. <span style="opacity:0.5;">(Uncheck this option if you're using a public computer)</span></label>
+			</div>
+			<button type="submit" class="btn btn-primary pull-right">Sign In</button>
+			<a href="{{env.platform('/account/forgottenpassword')}}" target="_top">Forgotten your password?</a>
+		</fieldset>
+	</form>
+</div>

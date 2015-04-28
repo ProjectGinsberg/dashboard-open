@@ -1,0 +1,319 @@
+.sign-up-step
+  +clearfix
+  margin: 50px auto
+  width: 45%
+  form
+    margin: 0
+  .step-number
+    margin-left: auto
+    margin-right: auto
+    margin-top: -.5em 
+    +border-radius(200px)
+    border: 2px solid $green
+    text-align: center
+    width: 65px
+    height: 65px
+    padding: 13px
+    .title
+      font-size: 11px 
+    .number
+      margin-top: -6px
+      font-size: 21px
+  &.disabled
+    +opacity(0.4)
+    @media (max-width: $screen-xs-max)
+      display: none
+  .step-description
+    text-align: left 
+    font-size: 14px
+    font-style: italic
+    text-align: justify
+      
+.question-list
+  margin-top: 20px
+  margin-bottom: 20px
+  line-height: 1.8em
+  +border-radius(3px)
+  +box-shadow(0 0 3px 1px rgba(179, 179, 179, 0.35))
+  &.disabled
+    +opacity(0.4)
+  ul
+    list-style: none
+    padding: 0
+    margin: 0
+    li
+      list-style: none
+      background: url("../images/icons/tick.svg") no-repeat 25px 50%
+  .question-item
+    padding: 10px 
+    padding-left: 76px
+    border: 1px solid #E9EAE5 
+    //rounded border bottom
+    &:last-child
+      +border-radius(0 0 3px 3px)
+  //rounded border top
+  > .question-item
+    +border-radius(3px 3px 0 0)
+  li.question-item
+    cursor: pointer
+    &:hover
+      color: white
+      background: lighten($green, 20%) url("../images/icons/tick_white.svg") no-repeat 25px 50%
+    &.selected
+      color: white
+      background: $green url("../images/icons/tick_white.svg") no-repeat 25px 50%
+  .question-title
+    padding: 10px
+    .icon
+      margin: 10px 15px
+      color: #CCC 
+      font-size: .95em
+    h3
+      text-transform: uppercase
+      color: $green
+      margin: 0
+
+    padding: 10px
+    .icon
+      margin: 10px 15px
+      color: #CCC 
+      font-size: .95em
+    h3
+      text-transform: uppercase
+      color: $green
+      margin: 0
+
+.sign-up-step,
+.question-list,
+.pre-footer
+  &.fade
+    +opacity(0.2)
+    @media (max-width: 470px)
+      display: none
+
+$facebook_blue: #395A92
+$jawbone_pink: #F20C56
+$run_keeper_blue: #35A0CE
+$twitter_blue: #4DADE8
+$mapmyfitness_blue: #16365C
+$google_plus_orange: #E14A3F
+$fitbit_green: #35C2C5
+$moves_green: #00D45B
+$strava_orange: #F36205
+.connections
+  h4 
+    text-transform: uppercase
+    font-size: 1.1em
+    color: $blue
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+a.connection
+  +clearfix
+  +border-radius(3px)
+  +box-shadow(0 0 3px 1px rgba(179, 179, 179, 0.35))
+  display: block
+  position: relative
+  min-height: 84px
+  font-size: 14px
+  font-weight: bold
+  margin-bottom: 40px
+  color: $gray
+  &:hover
+    color: $blue
+    .link
+      color: $blue
+  .left-square
+    +border-radius(3px 0 0 3px)
+    width: 80px
+    min-height: 80px
+    position: absolute 
+    height: 100%
+    background-color: $blue
+    display: inline-block
+    float: left
+    &.facebook
+      background: $facebook_blue url("../images/connections/facebook.png") center center no-repeat
+    &.jawbone
+      background: $jawbone_pink url("../images/connections/jawboneup.png") center center no-repeat
+    &.run_keeper
+      background: $run_keeper_blue url("../images/connections/runkeeper.png") center center no-repeat
+    &.twitter
+      background: $twitter_blue url("../images/connections/twitter.png") center center no-repeat
+    &.mapmyfitness
+      background: $mapmyfitness_blue url("../images/connections/mapmyfitness.png") center center no-repeat
+    &.google_plus
+      background: $google_plus_orange url("../images/connections/googleplus.png") center center no-repeat
+    &.fitbit
+      background: $fitbit_green url("../images/connections/fitbit.png") center center no-repeat
+    &.moves
+      background: $moves_green url("../images/connections/moves.png") center center no-repeat
+    &.strava
+      background: $strava_orange url("../images/connections/strava.png") center center no-repeat
+  .description
+    width: 60%
+    text-transform: uppercase
+    position: absolute
+    left: 100px
+    top: 50%
+    margin-top: -.75em 
+  .link
+    color: #ccc
+    font-size: 1.2em
+    position: absolute
+    right: 10px
+    top: 50%
+    margin-top: -.5em
+  &.active .link
+    color: $green
+
+.pre-footer
+  color: white
+  position: relative
+  padding-bottom: 50px
+  font-size: 16px
+  @media (max-width: $screen-xs-max)
+    text-align: center
+  .down-arrow-circle
+    position: absolute
+    left: 50%
+    margin: -25px auto 0 -25px 
+    width: 50px
+    height: 50px
+    +border-radius(25px)
+    border: 2px solid #8BC8A1
+    background: white url("../images/down_arrow.svg") no-repeat center center
+  h4
+    margin: 40px 0 10px 0
+    text-transform: uppercase
+    font-size: 2em
+    font-weight: normal
+  .tag
+    text-transform: uppercase
+    font-size: 0.8em
+  .continue-button
+    +border-radius(80px)
+    background-color: white
+    color: $green
+    margin-top: 85px
+    font-size: 1.05em
+    background-image: url("../images/left_arrow.svg") 
+    background-repeat: no-repeat
+    background-position: 90% 50%
+    padding: 4% 22% 4% 18%
+    text-transform: uppercase
+    min-width: 300px
+    &:hover
+      background-color: $green
+      color: white 
+      background-image: url("../images/left_arrow_white.svg") 
+    &:active
+      background-color: darken($green, 10%)
+      color: white 
+      background-image: url("../images/left_arrow_white.svg") 
+
+
+#sign-up-modal-container
+  position: relative
+  +clearfix
+#sign-up-modal 
+  z-index: 1000
+  position: absolute
+  width: 450px
+  left: 50%
+  margin-left: -225px
+  background-color: white
+  +border-radius(3px)
+  +box-shadow(0 0 3px 1px rgba(179, 179, 179, 0.35))
+  @media (max-width: 470px)
+    width: 100%
+    left: auto
+    margin-left: 0
+    position: relative
+
+  \::-webkit-input-placeholder
+    color: #ccc
+  \:-moz-placeholder
+    color: #ccc
+  \::-moz-placeholder
+    color: #ccc
+  \:-ms-input-placeholder
+    color: #ccc
+  /* For the polyfill */
+  .placeholder
+    color: #ccc
+  .modal-section
+    +clearfix
+    padding: 0 15px 
+    border-top: 1px solid #ececec
+    border-bottom: 1px solid #ECECEC 
+    &.padded-section
+      padding: 15px 20px
+    a
+      color: $green
+      &:hover
+        color: darken($green, 15%)
+    img
+      height: 21px
+    input[type="text"],
+    input[type="email"],
+    input[type="password"]
+      width: 80%
+      padding: 15px 5px
+      border: none
+      background: transparent
+      +box-shadow(none)
+      &:focus
+        +box-shadow(none)
+        outline: none
+    .text   
+      float: left
+      font-weight: bold
+      text-transform: uppercase
+      &.facebook
+        color: $facebook_blue
+      &.twitter
+        color: $twitter_blue
+      &.google_plus
+        color: $google_plus_orange 
+    .required
+      font-size: 10px
+      padding: 19px 5px
+      float: right
+      color: #ccc
+    .required-text
+      margin-top: -2px
+      margin-right: 5px
+    .has-error
+      input[type="text"],
+      input[type="email"],
+      input[type="password"]
+        color: #E6454C
+      \::-webkit-input-placeholder
+        color: #E6454C
+        &:after
+          content: " is not valid"
+      \:-moz-placeholder
+        color: #E6454C
+        &:after
+          content: " is not valid"
+      \::-moz-placeholder
+        color: #E6454C
+        &:after
+          content: " is not valid"
+      \:-ms-input-placeholder
+        color: #E6454C
+        &:after
+          content: " is not valid"
+      /* For the polyfill */
+      .placeholder
+        color: #E6454C
+        &:after
+          content: " is not valid"
+      .required
+        color: #E6454C
+  .padded-section .required
+    padding-top: 6px
+    padding-bottom: 4px
+    padding-right: 0

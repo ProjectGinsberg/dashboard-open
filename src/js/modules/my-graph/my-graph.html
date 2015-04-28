@@ -1,0 +1,158 @@
+<div id="environment-container"
+  period-selection
+  day-selection
+  wellbeing-data-selection
+  objective-data-selection
+  cookie-prefix="environment"
+  hopscotch="environment">
+
+  <div id="chart-button-container" class="hidden-xs">
+    <button type="button" id="prev-period-button" class="button" ng-click="selectPreviousPeriod()"></button>
+    <button type="button" id="next-period-button" class="button" ng-click="selectNextPeriod()" ng-show="hasNextPeriod()"></button>
+  </div>
+<div class="row">
+	<div id="welcome" class="col-lg-3 col-sm-12">
+	  <p>Add and review your data here. Switch between the different kinds of data to look for patterns.</p>
+	</div>
+
+  <div dropdown id="datatoggle-timeline" class="dropdown-chart-control col-sm-3 hidden-xs col-lg-2">
+    <a   dropdown-toggle class="menu-toggle col-sm-1 black-bg" href=""></a>
+    <div dropdown-toggle class="selected-set black-bg">
+      <p>over</p>
+    <p class="selected-title">{{ period() }} days</p>
+    </div>
+    <div dropdown-menu class="dropdown-chart-control-options black-bg">
+      <ul class="black-bg">
+        <li ng-repeat="p in [7, 30]" ng-class="{active: p==period()}">
+          <a href="" ng-click="period(p)">{{p}} days</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div dropdown id="datatoggle-objective" class="dropdown-chart-control col-sm-4 col-xs-6 col-lg-3">
+    <a   dropdown-toggle href="" class="menu-toggle col-sm-1 blue-bg"></a>
+    <div dropdown-toggle class="hidden-xs selected-set blue-bg">
+      <p>with</p>
+      <p class="selected-title">{{ objectiveSelection().name }}</p>
+    </div>
+    <div dropdown-toggle class="visible-xs selected-set blue-bg">
+      <p>{{ objectiveSelection().name }}</p>
+    </div>
+    <div dropdown-menu class="dropdown-chart-control-options">
+      <ul class="blue-bg">
+        <li ng-repeat="objective in objectiveSelectionRange()" ng-class="{active: objective.id==objectiveSelection().id}">
+          <a href=""
+          ng-click="objectiveSelection(objective.id)"
+          analytics-on="click" analytics-event="SelectedObjective"
+          analytics-category="SelectedObjective" analytics-label="{{objective.id}}"
+          >{{objective.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div dropdown id="datatoggle-subjective" class="dropdown-chart-control col-sm-5 col-xs-6 col-lg-4">
+    <a   dropdown-toggle href="" class="menu-toggle col-sm-1"></a>
+    <div dropdown-toggle class="hidden-xs selected-set green-bg">
+      <p>{{wellbeingSelection().question | questionLead}}</p>
+      <p class="selected-title green-bg">{{wellbeingSelection().question | questionBody}}</p>
+    </div>
+    <div dropdown-toggle class="visible-xs selected-set green-bg">
+      <p>{{wellbeingSelection().question | questionBody}}</p>
+    </div>
+    <div dropdown-menu class="dropdown-chart-control-options">
+      <ul class="green-bg">
+        <li ng-repeat="measure in wellbeingSelectionRange()" ng-class="{active: $index==wellbeingSelectionIndex()}">
+          <a href=""
+            ng-click="wellbeingSelectionIndex($index)"
+            analytics-on="click" analytics-event="SelectedSubjective"
+            analytics-category="SelectedSubjective" analytics-label="{{measure.question}}"
+            >{{measure.question | questionBody}}</a>
+        </li>
+      </ul>
+    </div>
+</div>
+<div id="charts" class="row">
+  <div class="col-sm-12">
+    <!-- SUBJECTIVE AKA WELLBEING CHART -->
+    <div id="wellbeing-chart" wellbeing-chart class="wellbeing-chart section">
+      <div id="add-wellbeing-datum" class="popover add-datum"
+        ng-show="wellbeing" ng-controller="AddWellbeingController">
+        <h3 class="popover-title">Add Wellbeing Data For</h3>
+        <p class="when">{{date | momentDate:'dddd, Do MMMM'}}</p>
+        <div ng-include="'/app/partials/wellbeing-question.html'"></div>
+        <button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()" analytics-on analytics-event="CancelledPopOver" analytics-category="CancelSavingWellbeing">Cancel</button>
+        <button ng-disabled="submitting" type='button' class="button green-button" ng-click="submit()" analytics-on analytics-event="SavedData" analytics-category="WellbeingData">{{ submitting | then:"Saving...":"Save"}}</button>
+      </div>
+
+      <div id="delete-wellbeing-datum" class="popover delete-datum"
+        ng-show="wellbeingDatumToDelete" ng-controller="DeleteWellbeingController">
+          <div class="heading">Delete data point?</div>
+          <button ng-disabled="submitting"  type='button' class="button blue-button" ng-click="hide()">Wait, I changed my mind</button>
+          <button ng-disabled="submitting"  type='button' class="button red-button" ng-click="submit()" analytics-on analytics-event="DataDeletion" analytics-category="DeleteWellbeingData">Yes, delete forever</button>
+      </div>
+    </div>
+
+    <!-- EVENT CHART -->
+    <div id="event-chart" event-chart class="event-chart section">
+      <div id="popover-event-add-help" class="popover black-popover">
+        <p>Log an event for {{selectedEvent.timestamp | date:'EEE, dd/MM/yyyy'}}</p>
+      </div>
+      <div ng-include src="'/templates/my-graph/event-chart/event-popover.html'"></div>
+    </div>
+
+    <!-- OBJECTIVE CHART -->
+    <div id="chart-objective" objective-chart class="section">
+
+      <div id="popover-objective-help" class="popover black-popover">
+        <p>You can add entries for past {{objectiveSelection().name.toLowerCase()}} data.</p>
+      </div>
+
+      <div id="add-objective-data-point" class="popover add-datum add-{{objectiveSelection().name.toLowerCase()}}" ng-show="date">
+        <div ng-hide="objectiveSelection().name == 'Sleep'">
+          <h3 class="popover-title">Add {{objectiveSelection().name}} data for</h3>
+          <p class="when">{{date | date:'EEE, dd/MM/yyyy'}}</p>
+        </div>
+        <div ng-include="objectiveSelectionTemplate()"></div>
+      </div>
+
+      <div id="existing-sleep-data-point" class="popover delete-sleep">
+        <div ng-include="'/app/partials/tracker/sleep-existing.html'"></div>
+      </div>
+
+      <div id="existing-social-data-point" class="popover delete-social">
+        <div ng-include="'/app/partials/tracker/social-existing.html'"></div>
+      </div>
+
+      <div id="delete-objective-data-point" class="popover delete-datum" ng-controller="DeleteObjectiveController">
+        <div ng-show="loading">Loading...</div>
+        <div ng-hide="loading">
+
+          <h3 class="popover-title">{{objectiveSelection().name}} data for</h3>
+          <p class="when">{{objectiveDeleteDate | date:'EEE, dd/MM/yyyy'}}</p>
+
+          <div class="display-section">
+            <ul class="objective-data-list">
+              <li ng-repeat="datum in data" class="objective-data-item repeat-item">
+                <span class="amount">{{datum.amount}} {{objectiveSelection().units}}</span>
+                <span class="pull-right">
+                  <span class="source">{{datum.source}}</span>
+                  <a class="clickable" ng-click="delete(datum)" analytics-on analytics-category="DeleteData" analytics-label="{{objectiveSelection().name}}"><i class="batch-icon bin"></i></a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <button type='button' class="button red-button" ng-click="hide()">Cancel</button>
+          <button ng-hide="objectiveSelection().id == 'social'" ng-click="add_more($event)" type="button" class="button green-button two-buttons">Add More</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- /OBJECTIVE CHART -->
+    <!-- MOBILE PERIOD NAV -->
+    <div id="chart-button-container-xs" class="visible-xs col-xs-12">
+      <a type="button" id="" class="button black-bg col-xs-5" ng-click="selectPreviousPeriod()">Prev 7 Days</a>
+      <a type="button" id="" class="button black-bg col-xs-5 col-xs-offset-2" ng-click="selectNextPeriod()" ng-show="hasNextPeriod()">Next 7 Days</a>
+    </div>
+    <!-- /MOBILE PERIOD NAV -->
+  </div>
+</div>

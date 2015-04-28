@@ -1,0 +1,3 @@
+#!/bin/bash
+
+locust --no-web -n 10000 -r 100 -c 100

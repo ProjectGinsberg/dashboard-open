@@ -1,0 +1,7 @@
+<div ng-hide="n.read" class="cell notification-read"><div class="unread-blob"></div></div>
+<div class="cell notification-icon"><i class="batch-icon speakerphone"></i></div>
+<div class="cell notification-text">
+  <p>
+    <strong>{{n.title}}:</strong> {{n.body.message | truncateHTML:10}} <a class="more" ng-click="more(n)">...more</a>
+  </p>
+</div>

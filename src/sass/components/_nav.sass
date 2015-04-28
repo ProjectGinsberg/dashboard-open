@@ -1,0 +1,244 @@
+//@import '../mixins/mixins'
+
+=activeNav
+	background-color: rgba(255, 255, 255, 0.2)
+	a
+		opacity: 1 !important
+
+#nav
+	margin: 0 0 50px 0
+
+.blank-nav
+	height: 10px
+
+.navbar-left
+	float: left
+.navbar-right
+	float: right
+
+.navmenu
+	> ul
+		list-style: none
+		margin-left: 0
+		padding-left: 0
+
+.our-nav
+	border: none
+	//overflow: auto // This breaks IE
+	> ul
+		+clearfix
+		margin: 0
+		padding: 0
+		list-style: none
+		height: 48px
+		> li
+			float: left
+			text-align: center
+			display: table
+			&.activeNav
+				+activeNav
+		.our-nav-a
+			opacity: 0.9
+			text-decoration: none
+			color: white
+			text-transform: uppercase
+			font-size: 12px
+			padding: 15px 20px
+			font-weight: 600
+			//hack for full-height
+			display: table-cell
+			&:hover
+				opacity: 1
+			.badge
+				border: 1px solid white
+				padding: 1px 5px 2px 5px
+				+border-radius(50px)
+
+ul.nav
+	li.disabled
+		.our-nav-a
+			cursor: default
+			opacity: 0.5
+			&:hover
+				opacity: 0.5
+				cursor: default
+
+ul.navbar-right
+	> li
+		float: right
+		&.activeNav
+			+activeNav
+
+#notifications
+	width: 55px
+	&.open
+		background-color: white
+		#notification-count
+			color: $blue
+			border: 1px solid $blue
+		.no-notifications
+			color: $blue
+	.our-nav-a
+		+transition(display 0.0s)
+		padding: 5px 10px
+		margin: 0
+		width: 40px
+		&.no-notifications
+			padding: 15px 10px
+			.bell
+				margin-top: 0.15em
+				font-size: 1.30em
+	&.blink
+		+animation(blink 0.5s infinite alternate)
+
+@keyframes blink
+	0%
+		background: transparent
+	5%
+		background: transparent
+	80%
+		background: white
+	100%
+		background: white
+
+@-webkit-keyframes blink
+	0%
+		background: transparent
+	50%
+		background: transparent
+	80%
+		background: white
+	100%
+		background: white
+
+@keyframes blink-fg
+	0%
+		color: white
+		border-color: white
+	50%
+		color: white
+		border-color: white
+	80%
+		color: $blue
+		border-color: $blue
+	100%
+		color: $blue
+		border-color: $blue
+
+@-webkit-keyframes blink-fg
+	0%
+		color: white
+		border-color: white
+	50%
+		color: white
+		border-color: white
+	80%
+		color: $blue
+		border-color: $blue
+	100%
+		color: $blue
+		border-color: $blue
+
+#notification-count
+	border: 1px solid
+	+border-radius(2.4em)
+	width: 3.2em
+	height: 3.2em
+	text-align: center
+	position: relative
+	+animation(blink-fg 0.5s linear infinite alternate)
+	.count
+		position: relative
+		top: 10px
+	.bell
+		position: absolute
+		top: 0
+		right: 0
+		margin-right: -.5em
+
+#notifications.open
+	#notification-list
+		display: block
+		ul
+			margin: 0
+			padding: 0
+
+#nav-me
+	position: relative
+	&.open
+		#about-me-dropdown
+			display: block
+
+#about-me-dropdown
+	position: absolute
+	z-index: 1000
+	margin-top: 48px
+	background-color: rgb(142,192,141)
+	left: 0
+	right: 0
+	display: none;
+
+#notification-list
+	position: absolute
+	width: 340px
+	background-color: white
+	right: 0
+	margin-top: 48px
+	z-index: 1000
+	+box-shadow(0px 2px 3px 0px #bbb)
+	max-height: 350px
+	overflow-y: scroll
+	overflow-x: hidden
+	font-size: 12px
+	display: none
+	.notice
+		position: relative
+		width: 100%
+		margin: 0
+		border: none
+		+clearfix
+		display: table
+		border-bottom: 1px solid #ccc
+		a
+			text-decoration: none
+			&:hover
+				text-decoration: underline
+		&:last-child
+			border-bottom: 4px solid $blue
+		&.read
+			+opacity(0.6)
+			color: #BBB
+			.notification-icon
+				color: #BBB !important
+				i
+					border-color: #BBB !important
+		.cell
+			display: table-cell
+			vertical-align: middle
+			text-align: center
+			padding: 25px 5px
+		.notification-read
+			position: absolute
+			padding: 0
+			top: 50%
+			text-align: right
+			margin-left: 12px
+			.unread-blob
+				height: 6px
+				width: 6px
+				background-color: $blue
+				+border-radius(5px)
+		.notification-icon
+			padding-left: 8%
+			width: 20% !important
+			font-size: 16px
+			color: $blue
+			i
+				border: 1px solid $blue
+				+border-radius(25px)
+				padding: 7px
+		.notification-text
+			padding-left: 20px
+			text-align: left
+			width: 70% !important
+			min-width: 265px

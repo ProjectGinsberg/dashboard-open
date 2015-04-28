@@ -1,0 +1,50 @@
+<div ng-controller="SleepController">
+		<h3 class="popover-title">Add {{objectiveSelection().name}} data for</h3>
+		<p class="when">Night of {{ date | momentAdd:-1:'day' | momentDate:'dddd, DD/MM/YYYY'}}</p>
+
+		<div class="input-section clearfix">
+			<div id="bedtimeform" class="sleep-input col-sm-6">
+				<label for="bedtime" class="input-heading">Sleep time</label>
+				<input required type="time" ng-model="bedTime" id="bedtime" class="form-control control" name="bedtime">
+			</div>
+
+			<div id="waketimeform" class="sleep-input col-sm-6">
+				<label for="waketime" class="input-heading">Wake time</label>
+				<input required type="time" ng-model="wakeTime" id="waketime" class="form-control control" name="waketime">
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="input-section">
+			<div class="sleep-quality">
+				<h3 class="input-heading">My quality of sleep was</h3>
+				<label>
+					<input type="radio" ng-model="sleepQuality" value=1>
+					<span class="radio-button"><span class="select red"></span></span><span class="name">Terrible</span>
+				</label>
+				<label>
+					<input type="radio" ng-model="sleepQuality" value=2>
+					<span class="radio-button"><span class="select light-red"></span></span><span class="name">Bad</span>
+				</label>
+				<label>
+					<input type="radio" ng-model="sleepQuality" value=3>
+					<span class="radio-button"><span class="select orange"></span></span><span class="name">OK</span>
+				</label>
+				<label>
+					<input type="radio" ng-model="sleepQuality" value=4>
+					<span class="radio-button"><span class="select yellow"></span></span><span class="name">Good</span>
+				</label>
+				<label>
+					<input type="radio" ng-model="sleepQuality" value=5>
+					<span class="radio-button"><span class="select green"></span></span><span class="name">Great</span>
+				</label>
+			</div>
+			<br/>
+		</div>
+
+		<button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()">Cancel</button>
+		<button ng-disabled="submitting" ng-click="submit()" type="button" class="btn green-button two-buttons">
+				{{submitting | then:"Saving...":"Confirm"}}
+		</button>
+</div>

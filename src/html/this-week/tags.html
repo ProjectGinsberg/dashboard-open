@@ -1,0 +1,9 @@
+<h3>Tags</h3>
+<ul class="word-cloud">
+	<li class="count-{{t.count}}" ng-repeat="t in tags">
+		<span ng-mouseover="mouseover(t.tag)"
+								  ng-mouseout="mouseout(t.tag)">
+		{{'#' + t.tag}}
+		</span>
+	</li>
+</ul>

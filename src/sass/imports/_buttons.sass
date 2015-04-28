@@ -1,0 +1,131 @@
+=button-background-color($color)
+  border: none
+  background-color: $color
+  +box-shadow(0px 2px 0px darken($color, 8%))
+  &:focus
+    border: none
+    background-color: $color
+    +box-shadow(0px 2px 0px darken($color, 8%))
+  &:hover
+    border: none
+    background-color: darken($color, 4%)
+    +box-shadow(0px 2px 0px darken($color, 12%))
+  &:active
+    border: none
+    background-color: darken($color, 10%)
+    +box-shadow(0px 2px 0px darken($color, 12%))
+
+.btn,
+.button
+  text-decoration: none
+  text-transform: uppercase
+  //background: transparent
+  //border: #E2E2E2 1px solid
+  //+box-shadow(none)
+  +border-radius(50px)
+  padding: 12px 17px
+  cursor: pointer
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus,
+    +box-shadow(inherit)
+    //border: #BBB 1px solid
+    outline: none
+  &:active
+    position: relative
+    top: 1px
+  &.error
+    background-color: lighten(#c0392b, 5%)
+    color: white
+    border-color: lighten(#c0392b, 5%)
+    +box-shadow(0px 3px 0px darken(#c0392b, 10%))
+  &.error
+    font-weight: bold
+    +box-shadow(0px 3px 0px darken(#c0392b, 10%))
+    &:after
+      content: " ...Error"
+  &.submitting,
+  &.disabled,
+  &[disabled]
+    cursor: not-allowed
+    pointer-events: none
+    +opacity(.65)
+    +box-shadow(none)
+
+.large-button
+  height: 42px
+  padding: 12px 17px
+  font-size: 14px
+
+.curved-button
+  display: inline-block
+  border: white 1px solid
+  +border-radius(20px)
+  padding: .4em 1em
+  margin: 5px
+
+.curved-border
+  display: inline-block
+  border: white 1px solid
+  +border-radius(20px)
+  padding: .4em 1em
+  margin: 5px
+
+.btn-danger,
+.button-danger,
+.error,
+.red-button,
+  letter-spacing: .05em
+  text-transform: uppercase
+  color: white !important
+  +button-background-color($button-red)
+
+.btn-success,
+.green-button,
+  letter-spacing: .05em
+  text-transform: uppercase
+  color: white !important
+  +button-background-color($green)
+
+.btn-primary,
+.blue-button,
+  letter-spacing: .05em
+  text-transform: uppercase
+  color: white !important
+  +button-background-color($button-blue)
+
+.white-button
+  color: black !important
+  +button-background-color(white)
+
+
+.nice-radio-button-container
+  input[type="radio"]:not(old)
+    width: 0
+    margin: 0
+    padding: 0
+    +opacity(0)
+    &:checked
+      &+ .nice-radio-button .select
+        background-color: $green
+
+.nice-radio-button
+  margin: 3px auto
+  width: 33px
+  height: 33px
+  display: block
+  border: 3px solid #D3D3D3
+  background-color: white
+  +border-radius(20px)
+  &:hover
+    cursor: pointer
+  .select
+    display: block
+    width: 15px
+    height: 15px
+    margin: 6px
+    background-color: transparent
+    +border-radius(12px)
+    &.on
+      background-color: $green

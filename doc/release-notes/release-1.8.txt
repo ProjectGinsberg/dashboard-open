@@ -1,0 +1,13 @@
+Title: Ginsberg 1.8 released!
+
+Alongside the usual bugfixes, we've added two major new features this release.
+
+* Fine-grained data control: The revamped [Connections page](/#/connections) now offers much more fine-grained control over the data that Ginsberg will pull in from your connected services.
+* Month-to-month sensor: The second is the 'Monthly Check-up' which you can use to gauge how you are month-to-month. It asks 6 simple questions about your wellbeing, and you can use it to get a broader understanding of how you're doing. Check out your notifications to get started.
+
+As ever, we really value your feedback and would love to know what you think (good and bad!). You can get in touch via [hello@project-ginsberg.com](mailto://hello@project-ginsberg.com) or on our [uservoice page](http://projectginsberg.uservoice.com/).
+
+Enjoy!
+
+Team Ginsberg
+

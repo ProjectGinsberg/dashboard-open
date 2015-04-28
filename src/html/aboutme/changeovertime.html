@@ -1,0 +1,31 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">How has my sleep changed over time?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">How has my step count changed over time?</h3>
+      <h3 ng-show="visibleMetric === 'nutrition'">How has my nutrition changed over time?</h3>
+
+      <a class="more-info" ng-click="showModal('how_has_my_sleep_changed_over_time')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="HowHasMySleepChangedOverTime"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div ng-hide="isDefined('monthByMonthSleepChange')" ng-include="'/app/partials/not_enough_data.html'"></div>
+  <div ng-hide="!isDefined('monthByMonthSleepChange')" class="graph-section graph-middle col-sm-6 col-xs-12">
+    <gb-month-by-month-change-graph></gb-month-by-month-change-graph>
+  </div>
+  <div class="graph-section graph-right col-sm-3 hidden-xs">
+    <div ng-hide="isDefined('monthByMonthSleepChange')" ng-include="'/app/partials/not_enough_data.html'"></div>
+    <div ng-hide="!isDefined('monthByMonthSleepChange')">
+      <p ng-show="visibleMetric === 'sleep'" class="stat-desc">Over the last <strong>{{monthByMonthRange}} months</strong>, your sleep has changed by</p>
+      <p ng-show="visibleMetric === 'steps'" class="stat-desc">Over the last <strong>{{monthByMonthRange}} months</strong>, your step count has changed by</p>
+      <p ng-show="visibleMetric === 'nutrition'" class="stat-desc">Over the last <strong>{{monthByMonthRange}} months</strong>, your nutrition has changed by</p>
+
+      <div class="circle-stat">{{monthByMonthSleepChange | formatMetricToHuman:visibleMetric}}</div>
+      <div class="overlapping-small-stats hidden-sm">
+        <p class="stat-desc">{{visibleMetric}} <strong>High / Low</strong></p>
+        <div class="circle-stat red">{{lowMonth}}</div>
+        <div class="circle-stat blue">{{highMonth}}</div>
+      </div>
+    </div>
+  </div>
+</div>

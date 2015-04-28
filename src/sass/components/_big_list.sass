@@ -1,0 +1,24 @@
+.biglist
+  ol
+    padding-left: 0px
+    margin-left: 0
+    margin-top: 38px
+    list-style-type: none
+    counter-reset: item
+  li
+    // this is the 01 label styling
+    color: #deedc7
+    font-size: 105px
+    line-height: 75px
+    font-weight: bold
+    display: inline
+  li:before
+    float: left
+    clear: both
+    content: "0" counter(item) "  "
+    counter-increment: item
+  ol li p
+    padding-bottom: 0px
+    margin-left: 140px
+    line-height: 13px
+    font-size: 13px

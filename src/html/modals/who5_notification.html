@@ -1,0 +1,50 @@
+<div id="who5_notification" class="modal" ng-controller="WhoFiveController">
+	<img src="images/spinner.gif" alt="loading" ng-show="loading">
+	<div ng-hide="loading || isDefined('currentQuestion')">
+		<div class="modal-icon"><i class="batch-icon cogs"></i></div>
+		<!--<h1>{{currentNotification.title}}</h1>-->
+
+		<!--<div ng-bind-html="trusted(currentNotification.body.message)"></div>-->
+		<h1>Wellbeing check-up</h1>
+		<div>
+			<p>At sign up, we asked you 6 questions about how you feel.</p>
+			<p>Would you like to do a check-up and see how you feel now?</p>
+		</div>
+
+		<br/>
+		<button type="button" ng-click="getQuestions()" class="button green-button">Start check-up</button>
+	</div>
+	<div ng-show="!finished && !loading && isDefined('currentQuestion')" >
+		<div class="modal-header">
+			<h1 class="pull-left"><span class="circle"><i class="batch-icon person"></i></span>Understanding You</h1>
+
+			<h4 class="pull-right">{{currentQuestion.title}}</h4>
+		</div>
+		<br class="clearfix"/>
+		<div class="question-number">
+			<span class="circle"><span class="green">Q{{currentQuestion.question_order}}</span></span>
+		</div>
+		<br class="clearfix"/>
+		<h2 class="question-title">{{currentQuestion.question}}</h2>
+		<div class="questions">
+			<label ng-repeat="answer in currentQuestion.answer_options" class="nice-radio-button-container question">
+				<input type="radio" ng-model="currentQuestion.answer" value="{{answer.value}}">
+				<span class="nice-radio-button"><span class="select green"></span></span><span class="name">{{answer.text}}</span>
+			</label>
+		</div>
+		<br/>
+		<br/>
+		<button type="button" class="green-button button" ng-click="nextQuestion()">{{currentQuestion.buttonText}}</button>
+	</div>
+	<div ng-show="finished">
+		<div class="modal-icon"><i class="batch-icon cogs"></i></div>
+
+		<h1>Thanks!</h1>
+		<div>
+			<p>We'll notify you when your results are ready to view, and we'll check in with you again in four weeks time.</p>
+		</div>
+
+		<br/>
+		<button type="button" ng-click="dismiss()" class="button green-button">Okay</button>
+	</div>
+</div>

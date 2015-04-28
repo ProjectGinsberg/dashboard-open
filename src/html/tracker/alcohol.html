@@ -1,0 +1,36 @@
+<div ng-controller="AlcoholController">
+	<div class="input-section clearfix">
+		<h3>{{units}} units</h3>
+	</div>
+
+	<div class="input-section">
+		<!-- graceful degradation -->
+		<input type="range" ng-hide="isWebkit" ng-model="units" step="1" min="0" max="{{maxUnits}}" />
+		<div class="range-slider" ng-show="isWebkit">
+			<input class="bar" style="{{leftFill()}}" type="range" ng-model="units" step="1" min="0" max="{{maxUnits}}" />
+		</div>
+	</div>
+
+	<div class="input-section">
+		<h3 class="input-heading">Which is about the same as</h3>
+		<div id="guidance" class="row">
+			<div class="col-xs-4 beer">
+				<strong>{{converter(beer_units)}} pints<br/> of beer</strong>
+			</div>
+			<div class="col-xs-4 wine">
+				<strong>{{converter(wine_units)}} glasses<br/> of wine</strong>
+			</div>
+			<div class="col-xs-4 shots">
+				<strong>{{converter(spirits_units)}} shots<br/> of spirits</strong>
+			</div>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()">Cancel</button>
+	<button ng-disabled="submitting" ng-click="submit()" type="button" class="btn green-button">
+			{{submitting | then:"Saving...":"Confirm"}}
+	</button>
+
+</div>

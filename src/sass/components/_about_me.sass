@@ -1,0 +1,466 @@
+.graph-row
+	width: 100%
+	display: table
+	background-color: white
+	@media (max-width: $screen-xs-max)
+		+clearfix
+		display: block
+	&:nth-child(odd)
+		background-color: #F5F5F5
+	h3
+		font-weight: normal
+		margin: 5px
+		line-height: 120%
+	.container
+		padding: 20px 40px
+	svg
+		vertical-align: top
+		width: 100%
+
+.graph-section
+	display: table-cell
+	vertical-align: middle
+	float: none
+	padding: 0
+	max-width: 50%
+	&:last-child
+		border-left: 2px solid white
+		margin-left: -2px
+	&.no-border
+		border: none
+		margin-left: 0
+	@media (max-width: $screen-xs-max)
+		+clearfix
+		display: block
+		float: left
+		padding: 0
+		max-width: 100%
+	a.more-info
+		font-size: 12px
+		font-style: italic
+
+.no-data-graph-section
+	padding-top: 75px
+	padding-bottom: 75px
+	//image from patternify.com
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAJ0lEQVQIW2M8e/asMRCcZUADjCA+NkmwBDZJuAS6JIoEsiSGBEwSAOxtFqElOAx2AAAAAElFTkSuQmCC") repeat
+	h4,p
+		margin: 0
+
+
+.graph-left
+	background-color: inherit
+	border-right: 1px solid $green
+	&> .container
+		position: relative
+	.dot
+		position: absolute
+		right: 0
+		top: 50%
+		margin-right: -10px
+		margin-top: -10px
+		width: 20px
+		height: 20px
+		z-index: 10
+		background-color: $green
+		border: 2px solid white
+		+border-radius(10px)
+	.border-mask
+		z-index: 5
+		position: absolute
+		right: -1px
+		top: 0
+		height: 50%
+		width: 1px
+		background-color: inherit
+	@media (max-width: $screen-xs-max)
+		border: none
+		.dot,
+		.border-mask
+			display: none
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// First panel: How do I sleep on average?
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.circle-stat
+	font-weight: bold
+	border: solid 1px $gray
+	color: $gray
+	+border-radius(40px)
+	width: 80px
+	height: 80px
+	padding: 28px 5px
+	text-align: center
+	z-index: 1
+	position: relative
+	float: left
+	@media (max-width: $screen-md-max)
+		margin: 15px
+		padding: 21px 2px
+		width: 65px
+		height: 65px
+.stat-desc
+	width: 40%
+	margin-left: 15%
+	margin-right: 5%
+	float: left
+	margin-top: 20px
+	font-size: 12px
+	font-style: italic
+	z-index: 1
+	position: relative
+	strong
+		font-style: normal
+	@media (max-width: $screen-md-max)
+		margin-left: 5%
+		margin-right: 0
+	@media (max-width: $screen-xs-max)
+		margin-left: 15%
+
+#sleep-averages
+	+clearfix
+	width: 100%
+	+box-sizing(content-box)
+	.average
+		width: 33.333%
+		border-left: 1px solid white;
+		border-right: 1px solid white;
+		position: relative
+		float: left
+		height: 220px
+		&:first-child
+			border-left: none
+		&:last-child
+			border-right: none
+		.circle-stat-container
+			@media (max-width: $screen-xs-max)
+				width: 100%
+				margin: 0 auto
+				text-align: center
+		.circle-stat
+			margin-top: 60px
+			border: 2px solid white
+			color: white
+			font-weight: normal
+			display: inline-block
+			z-index: 1
+			position: relative
+			float: none
+			@media (max-width: $screen-xs-max)
+				+clearfix
+				margin-top: 20px
+		.stat-desc
+			margin-top: 80px
+			@media (max-width: $screen-md-max)
+				margin-left: 5%
+			@media (max-width: $screen-xs-max)
+				width: 100%
+				margin: 0 auto
+				padding: 0 10px
+	.fill
+		position: absolute
+		bottom: 0
+		width: 100%
+		z-index: 0
+	.middle
+		.fill
+			height: 50%
+			background-color: #E6EEDA
+	.less
+		.fill
+			height: 50%
+			background-color: #F2D7DE
+	.more
+		.fill
+			height: 50%
+			background-color: #CDE5E7
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Second panel: Has my sleep gone up or down lately?
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.rolling-average-line
+	fill: none
+	stroke: $green
+	stroke-width: 5px
+
+.overlapping-small-stats
+	.circle-stat
+		padding: 15px 0px
+		max-width: 50px
+		max-width: 50px
+		width: 50px
+		height: 50px
+		margin-left: -6px
+		margin-top: -12px
+		&:first-child
+			margin-left: 5px
+		&.red
+			background-color: transparentize(#EC7E9E, .8)
+		&.blue
+			background-color: transparentize(#5CB6BF, .8)
+	.stat-desc
+		margin-top: 10px
+
+
+//histogram
+.less-bar,
+.more-bar,
+.bar
+	rect
+		fill: #E2E2E2
+		&.highlight
+			fill: $green
+.x-axis-line
+	fill: none
+	stroke-width: 1
+	stroke: #E6E6E6
+.xtext,
+.xtext-label
+	font-size: 11px
+	font-style: italic
+	fill: #8C8C8C
+
+.vertical-line
+	border-left: 2px dashed $green
+	border-top: 2px dashed $green
+	border-bottom: 2px dashed $green
+	position: relative
+	width: 20px
+	height: 100%
+	margin-left: 24px
+.middle-positioned-stat
+	position: absolute
+	top: 50%
+	width: 75px
+	height: 75px
+	padding: 24px 0px
+	margin-top: -37px
+	margin-left: -40px
+	background-color: white
+	border-color: $green
+	border-width: 2px
+
+.overlapping-stacked-stats
+	+clearfix
+	&.top
+		.circle-stat
+			margin-top: 10px
+			margin-bottom: -5px
+	&.bottom
+		.circle-stat
+			margin-top: -5px
+
+
+path.other
+	fill: url(#blankpattern) #CCCCCC
+
+.word-cloud
+	padding: 5px 20px 10px 20px
+	margin: 0
+	list-style: none
+	text-align: center
+	+clearfix
+	li
+		display: inline-block
+		margin: 6px 4px
+		padding: 0
+		line-height: 110%
+	.count-1
+		font-size: 1em
+	.count-2
+		font-size: 1.2em
+	.count-3
+		font-size: 1.4em
+	.count-4
+		font-size: 1.6em
+	.count-5
+		font-size: 1.8em
+	.count-6
+		font-size: 2em
+	.count-7
+		font-size: 2.2em
+	.count-8
+		font-size: 2.4em
+	.count-9
+		font-size: 2.6em
+	.count-10
+		font-size: 2.8em
+	.other
+		color: #CCC !important
+.good-sleeps
+	.index-0
+		color: #54B7BE
+	.index-1
+		color: #6EC2C7
+	.index-2
+		color: #88CCD1
+	.index-3
+		color: #A3D8DB
+	.index-4
+		color: #BCE2E4
+.bad-sleeps
+	.index-0
+		color: #EC7E9E
+	.index-1
+		color: #EE91AC
+	.index-2
+		color: #F1A4BB
+	.index-3
+		color: #F4B7C8
+	.index-4
+		color: #F8CBD8
+
+.tag-graph-label
+	shape-rendering: crispEdges
+	font-size: 11px
+	color: #BBB
+	font-style: italic
+
+.vertical-line-container
+	width: 10%
+	float: left
+	height: 260px
+	@media (max-width: $screen-md-max)
+		display: none
+.overlapping-stacked-stats-container
+	width: 80%
+	float: left
+	@media (max-width: $screen-md-max)
+		width: 100%
+
+#correlations-carousel-container
+	position: relative
+	text-align: center
+	overflow: hidden
+	height: 230px
+	width: 100%
+	ul#correlations-carousel
+		width: 100%
+		height: 100%
+		overflow: hidden
+		padding: 0
+		margin: 0
+	li
+		display: block
+		list-style: none
+		width: 100%
+		height: 100%
+		padding-top: 40px
+		padding-left: 20px
+		padding-right: 20px
+		text-align: center
+		p.insight
+			font-size: 22px
+			font-style: italic
+			padding-left: 100px
+			padding-right: 100px
+			margin-left: auto
+			margin-right: auto
+			@media (max-width: $screen-md-max)
+				padding-left: 20px
+				padding-right: 20px
+			strong
+				font-style: oblique
+				font-weight: bold
+				&.none
+					color: #CCC
+				&.small
+					color: $pink
+				&.large
+					color: $blue
+
+#correlations-carousel-controls
+	margin-top: -50px
+	.button
+		+box-shadow(none)
+		border: 1px solid #BBB
+		color: transparent
+		padding: 8px 12px
+		margin: 5px
+		text-decoration: none
+		background: #EEEEEE url('../images/icons/chevron_small_right.svg') 13px center no-repeat
+		&:first-child
+			background: #EEEEEE url('../images/icons/chevron_small_left.svg') 10px center no-repeat
+
+#correlations-rating
+	+clearfix
+	.answer-preview
+		color: #CCC
+		margin: 1em auto 2em auto
+	.rating-container
+		display: table
+		width: 90%
+		margin: 0 5%
+	.rating-button-line
+		width: 70%
+		margin: 0 15%
+		margin-bottom: -34px
+		border-top: 1px dashed #CCC
+	.rating-labels
+		+clearfix
+		width: 80%
+		margin: 0 10%
+		.name
+			display: block
+			font-style: oblique
+			font-size: 12px
+			&:first-child
+				float: left
+			&:last-child
+				float: right
+	label
+		display: table-cell
+		vertical-align: top
+		text-align: center
+		margin: 0 8px
+		margin-top: -10px
+		.radio-button
+			margin: 3px auto
+			width: 20px
+			height: 20px
+			display: block
+			border: 1px solid #DADADA
+			background-color: white
+			+border-radius(20px)
+			.select
+				display: none
+				width: 12px
+				height: 12px
+				margin: 3px
+				+border-radius(12px)
+		&:hover
+			cursor: pointer
+	input[type="radio"]:not(old)
+		width: 0
+		margin: 0
+		padding: 0
+		+opacity(0)
+		&:hover
+			& + .radio-button
+				.select
+					display: block
+					&.red
+						border: #D95D5B 2px solid
+					&.light-red
+						border: #D28484 2px solid
+					&.orange
+						border: #D5A785 2px solid
+					&.yellow
+						border: #D8D183 2px solid
+					&.green
+						border: #B9DA83 2px solid
+		&:checked
+			& + .radio-button
+				.select
+					display: block
+					&.red
+						background-color: #D95D5B
+					&.light-red
+						background-color: #D28484
+					&.orange
+						background-color: #D5A785
+					&.yellow
+						background-color: #D8D183
+					&.green
+						background-color: #B9DA83

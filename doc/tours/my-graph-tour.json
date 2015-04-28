@@ -1,0 +1,74 @@
+{
+    "id": "environment",
+    "path": "/my-graph",
+    "steps": [
+        {
+            "title": "Your environment",
+            "content": "<p>This page helps you compare how you've been feeling with other activity in your life.</p>",
+            "target": ".nav-my-graph",
+            "placement": "bottom"
+        },
+        {
+            "title": "Your mood",
+            "content": "<p>Select the question that captures the aspect of your mood you're interested in here...</p>",
+            "target": "#datatoggle-subjective",
+            "placement": "bottom",
+            "xOffset": "center",
+            "arrowOffset": "center"
+        },
+        {
+            "title": "Wellbeing chart",
+            "content": "<p>This chart will show you your recent responses to the selected mood question.</p><p>You can remove any data point by clicking on it. This will popup a confirm box so you can't delete anything accidentally.</p>",
+            "target": ".wellbeing-chart",
+            "placement": "top",
+            "xOffset": "200",
+            "yOffset": "200",
+            "arrowOffset": "center"
+        },
+        {
+            "title": "Add data point",
+            "content": "<p>Click here to add a data point</p>",
+            "target": ".add-subjective-data",
+            "yOffset": "-10",
+            "placement": "left"
+        },
+        {
+            "title": "Your environment",
+            "content": "<p>Select the environmental factor that you want to compare here. We've selected 'social' which, if you've connected Twitter or Facebook, shows your levels of social media activity.</p>",
+            "target": "#datatoggle-objective",
+            "placement": "bottom",
+            "xOffset": "center",
+            "arrowOffset": "center",
+            "onShow": "function() {_scope.$apply(function() { _scope.objectiveSelection('social') });}"
+        },
+        {
+            "title": "Environment chart",
+            "content": "<p>Your selected environmental factor is charted out here.</p>",
+            "target": "#chart-objective",
+            "placement": "top",
+            "xOffset": "200"
+        },
+        {
+            "title": "Logging environmental data",
+            "content": "<p>Although you can't manually enter data for 'social' activity, you can for other types. We've just selected 'alcohol' for you...</p>",
+            "target": "#datatoggle-objective",
+            "placement": "bottom",
+            "arrowOffset": "center",
+            "onShow": "function() {_scope.$apply(function() { _scope.objectiveSelection('alcohol') });}"
+        },
+        {
+            "title": "Add alcohol data point",
+            "content": "<p>Click on plus icons to add data.</p>",
+            "target": ".add-objective-data",
+            "placement": "right",
+            "yOffset": "-16"
+        },
+        {
+            "title": "Back to the future",
+            "content": "<p>Review and compare older data by clicking here.</p>",
+            "target": "#prev-period-button",
+            "placement": "right"
+        }
+    ]
+}
+

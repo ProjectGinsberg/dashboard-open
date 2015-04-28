@@ -1,0 +1,44 @@
+<div class="row">
+	<this-week-heading></this-week-heading>
+</div>
+<div class="row thisWeek">
+	<div ng-controller="DiaryController" class="col-md-4">
+		<div ng-repeat="entry in entries">
+			<diary-entry></diary-entry>
+		</div>
+	</div>
+	<div class="col-md-4 centreCol">
+		<div class="row" ng-controller="AverageDayController">
+			<average-day class="col-md-6"></average-day>
+			<total-week class="col-md-6"></total-week>
+		</div>
+		<div class="row" ng-controller="InsightsController">
+			<insights class="col-md-12"></insights>
+		</div>
+		<div class="row" ng-controller="TagsController">
+			<tags class="col-md-12"></tags>
+		</div>
+	</div>
+	<div ng-controller="WellbeingScoresController" class="col-md-4">
+		<div class="row">
+			<div style="height:350px" class="col-md-3" ng-repeat="wellbeingScore in wellbeingScores">
+				<wellbeing-chart class="" ng-attr-id="{{'wellbeingChart'+wellbeingScore.id}}"></wellbeing-chart> <br />
+				<span class="titleText">{{wellbeingScore.question}}</span>
+			</div>
+			<div class="col-md-3">
+				<!-- TODO: fix this #sadface -->
+				<span style="position:absolute;top:60px;right:10px;font-weight:600;font-size:0.7em;color:#77C95C;text-transform:uppercase">Strongly Agree</span>
+				<span style="position:absolute;top:120px;right:10px;font-weight:600;font-size:0.7em;color:#A9C577;text-transform:uppercase">Agree</span>
+				<span style="position:absolute;top:175px;right:10px;font-weight:600;font-size:0.7em;color:#C5B277;text-transform:uppercase">Undecided</span>
+				<span style="position:absolute;top:230px;right:10px;font-weight:600;font-size:0.7em;color:#C59177;text-transform:uppercase">Disagree</span>
+				<span style="position:absolute;top:290px;right:10px;font-weight:600;font-size:0.7em;color:#C58077;text-transform:uppercase">Strongly Disagree</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row thisWeek" ng-controller="PeriodSelectorController">
+	<div class="text-center">
+		<button class="button blue-button" ng-click="prevWeek()">Previous Week</button>
+		<button class="button blue-button" ng-click="nextWeek()">Next Week</button>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div ng-controller="ExerciseController">
+  <div class="input-section">
+	<h3 class="input-heading">Exercise Type</h3>
+	<div class="input-with-units">
+	  <!--<span class="input-units">Type</span>-->
+	  <select ng-model="activityType" name="type" id="activityType" class="form-control">
+		<option value="Walking">Walking</option>
+		<option value="Running">Running</option>
+		<option value="Other Cardio">Other Cardio</option>
+		<option value="Weight Training">Weight Training</option>
+		<option value="Sport">Sport</option>
+		<option value="Yoga">Yoga</option>
+		<option value="Meditation">Meditation</option>
+		<option value="Cycling">Cycling</option>
+		<option value="Other">Other</option>
+	  </select>
+	</div>
+  </div>
+
+  <button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()">Cancel</button>
+  <button ng-disabled="submitting" ng-disabled="exercise_type" ng-click="submit()" type="button" class="button green-button two-buttons">
+	{{submitting | then:"Saving...":"Confirm"}}
+  </button>
+</div>

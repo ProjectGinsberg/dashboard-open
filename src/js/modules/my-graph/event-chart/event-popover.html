@@ -1,0 +1,29 @@
+<div id="add-event" class="popover add-datum" ng-controller="EventPopoverController">
+	<h3 class="popover-title">Add event for</h3>
+	<p class="when">{{selectedEvent.timestamp | date:'EEE, dd/MM/yyyy'}}</p>
+	<event-editor></event-editor>
+	<div class="tags" ng-show="tags" ng-hide="suggestedTags.length > -1">
+		<h3 class="popover-title">Recent tags</h3>
+		<ul>
+			<li ng-repeat="tag in tags | limitTo:10">
+				<a class="tag" ng-click="insert(' #' + tag + ' ')">#{{tag}}</a>&nbsp;
+			</li>
+		</ul>
+	</div>
+	<div class="tags" ng-show="suggestedTags.length > -1">
+		<h3 class="popover-title">Suggested tags</h3>
+		<ul>
+			<li ng-repeat="tag in suggestedTags | limitTo:10">
+				<a ng-click="complete(tag)"><span class="tag">#{{tag}}</span></a>&nbsp;
+			</li>
+		</ul>
+		<ul ng-show="suggestedTags.length == 0">
+			<li>No matching tags</li>
+		</ul>
+	</div>
+	<div class="errors">{{error}}</div>
+	<button ng-disabled="submitting" type="button" class="button red-button" ng-click="hide()"
+		analytics-on analytics-event="CancelledPopOver" analytics-category="CancelSavingEvent">Cancel</button>
+	<button ng-disabled="submitting" type="button" class="button green-button" ng-click="submit()"
+		analytics-on analytics-event="SavedData" analytics-category="EventData">{{ submitting | then:"Saving...":"Save"}}</button>
+</div>

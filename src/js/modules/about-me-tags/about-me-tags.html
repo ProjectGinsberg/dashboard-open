@@ -1,0 +1,76 @@
+<div class="container" ng-controller="AboutMeTagsController">
+
+<div class="row">
+	<div class="col-lg-3">
+		<h1>What are my triggers related to mood?</h1>
+	</div>
+	<div class="col-lg-9">
+	<table class="table table-striped">
+	<thead>
+		<th>Tag</th>
+		<th>Last used</th>
+		<th>How often</th>
+		<th>Related tags</th>
+		<th>Average mood</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="tag in tags">
+			<td><span class="tag">#{{tag.name}}</span></td>
+			<td>{{tag.lastUsed | momentDate:'dddd D MMM YYYY'}}</td>
+			<td>{{tag.count}}</td>
+			<td><span class="tag" ng-repeat="related in tag.relatedTags">#{{related}}</span></td>
+			<td>{{tag.mood}} ({{tag.averageWellbeing | dp:2}})</td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-3">
+		<h1>What are my triggers related to exercise?</h1>
+	</div>
+	<div class="col-lg-9">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Exercise</th>
+				<th>Tags</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="activity in activities">
+				<td>{{activity.timestamp | date:'d MMM yyyy'}}</td>
+				<td>{{activity.activity_type | titlecase}}</td>
+				<td><span class="tag" ng-repeat="tag in activity.tags">#{{tag}}</span></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-3">
+	<h1>What are my triggers related to alcohol?</h1>
+	</div>
+	<div class="col-lg-9">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Alcohol</th>
+				<th>Tags</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="evt in alcohol">
+				<td>{{evt.timestamp | date:'d MMM yyyy'}}</td>
+				<td>{{evt.units}} units</td>
+				<td><span class="tag" ng-repeat="tag in evt.tags">#{{tag}}</span></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+</div>

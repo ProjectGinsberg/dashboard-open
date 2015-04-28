@@ -1,0 +1,55 @@
+$transition_time_activity: 1s
+
+.differences.ng-hide-remove
+  -webkit-animation: $transition_time_activity fade-in-grow ease-out
+  -moz-animation: $transition_time_activity fade-in-grow ease-out
+  -o-animation: $transition_time_activity fade-in-grow ease-out
+  animation: $transition_time_activity fade-in-grow ease-out
+  display: block !important
+
+.differences.ng-hide-add
+  -webkit-animation: $transition_time_activity fade-out-grow ease-out
+  -moz-animation: $transition_time_activity fade-out-grow ease-out
+  -o-animation: $transition_time_activity fade-out-grow ease-out
+  animation: $transition_time_activity fade-out-grow ease-out
+
+@keyframes fade-in-grow
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@-moz-keyframes fade-in-grow
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@-webkit-keyframes fade-in-grow
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@keyframes fade-out-grow
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+@-moz-keyframes fade-out-grow
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+@-webkit-keyframes fade-out-grow
+  from
+    opacity: 1
+  to
+    opacity: 0

@@ -1,0 +1,33 @@
+.table-container
+  position: relative
+  +clearfix
+  margin-top: 20px
+  margin-bottom: 20px
+#thetable
+  margin: 0 auto
+  width: 90%
+  font-weight: lighter
+  em.date
+    font-size: 0.8em
+    font-weight: lighter
+  td, th
+    padding: 9px 0
+    border-left: 1px solid #ededed
+    border-right: 1px solid #ededed
+    width: 10%
+  th
+    text-align: left
+    vertical-align: top
+  td, th:not(:first-child)
+    padding-left: 20px
+  tr
+    border-bottom: 1px solid #ededed
+  tr:last-child
+    border-bottom: none
+  td:first-child, th:first-child
+    border-left: none
+    border-right: none
+  td:nth-child(2), th:nth-child(2)
+    border-left: none
+  td:last-child, th:last-child
+    border-right: none

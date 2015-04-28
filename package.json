@@ -1,0 +1,22 @@
+{
+  "name": "ginsberg-dashboard",
+  "version": "1.11.0",
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-angular-templates": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-jasmine": "^0.8.1",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-gitinfo": "^0.1.7",
+    "grunt-http-server": "*",
+    "grunt-ng-annotate": "*",
+    "grunt-protractor-runner": "^1.1.4",
+    "grunt-rename": "*",
+    "grunt-sass": "*",
+    "grunt-usemin": "~2.0.0",
+    "selenium-webdriver": "^2.42.1",
+    "request":"2.51.0"
+  }
+}

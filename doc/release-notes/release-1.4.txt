@@ -1,0 +1,15 @@
+Title: Ginsberg 1.4 released!
+
+Hello and welcome to the Ginsberg 1.4 release. Here are some of the highlights:
+
+*   Track important events in the new Events timeline on the 'My Graph' page
+*   Reflect on your sleeping habits in the new [About Me](/#/me) page
+*   Get alerts about your connections and new features through the Notifications System (you're looking at it!)
+*   Use #hashtags to track important factors inside the Events timeline
+*   Numerous bug fixes and cosmetic tweaks
+
+As ever, we really value your feedback and would love to know what you think (good and bad!). You can get in touch via [hello@project-ginsberg.com](mailto://hello@project-ginsberg.com) or on our [uservoice page](http://projectginsberg.uservoice.com/).
+
+Enjoy!
+
+Team Ginsberg

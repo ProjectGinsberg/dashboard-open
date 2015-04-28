@@ -1,0 +1,114 @@
+$brandColours: ((jawbone, #ED1556), (facebook, #3B5998), (twitter, #00ACED), (fitbit, #45C2C5), (healthgraph, #409FD3), (mapmyfitness, #183560), (moves, #00D55A), (strava, #F36305), (googleplus, #CC3732))
+
+#connected,
+#not_connected
+  +clearfix
+  .connection
+    width: 310px
+    padding: 15px 20px
+    margin: 20px 50px 20px 0px
+    float: left
+    +box-shadow(0px 0px 2px 1px #E3E3E3)
+    border-bottom: 4px solid #CCC
+  .connection-heading
+    +clearfix
+  .connection-name
+    font-size: 14px
+    font-weight: bold
+  .connection-type
+    font-size: 12px
+    font-weight: lighter
+    color: #CCC
+    clear: left
+    float: left
+    margin-top: -2px
+  .connection-button
+    float: right
+    margin-top: -20px
+    font-size: 12px
+    +transition(all .15s)
+    color: inherit
+    text-transform: uppercase
+    text-decoration: none
+    +border-radius(50px)
+    padding: 3px 12px
+    letter-spacing: .05em
+    text-transform: uppercase
+    color: white
+    +button-background-color(#CCC)
+  .connection-measures
+    height: 100px
+    overflow: hidden
+    padding: 20px 0px
+    font-size: 12px
+    font-style: oblique
+    .checkbox
+      width: 50%
+      padding: 0px 0px 5px 20px
+      display: inline-block
+      vertical-align: middle
+      margin:  0 0 5px 0
+      & + .checkbox
+        margin:  0 0 5px 0
+      label
+        width: 100%
+        padding: 0
+        font-style: regular
+        color: #717171
+  .connection-status
+    background-color: #CCC
+    /* inverse margin to .connection padding */
+    margin-left: -20px
+    margin-right: -20px
+    margin-bottom: -15px
+    padding: 2px 20px
+    font-size: 13px
+    text-align: center
+    color: white
+    a
+      color: white
+      text-decoration: none
+      &:hover
+        text-decoration: underline
+    p
+      +opacity(0.5)
+    p,a
+      font-weight: lighter
+
+  .connection
+    @each $brandColour in $brandColours
+      $brand: nth($brandColour, 1)
+      $colour: nth($brandColour, 2)
+      &.#{$brand}
+        border-color: $colour
+        .connection-name
+          color: $colour
+        .connection-button
+          +button-background-color($colour)
+        .connection-status
+          background-color: $colour
+
+#not-connected
+  .connection
+    /* list all variations to allow style override */
+    @each $brandColour in $brandColours
+      $brand: nth($brandColour, 1)
+      $colour: nth($brandColour, 2)
+      &.#{$brand}
+        .connection-button
+          +button-background-color(#DDD)
+          &:hover
+            +button-background-color($colour)
+
+#connections-no-data
+  margin: 40px 0
+  .no-data-available
+    padding: 40px 0
+    border-style: dashed
+    color: #7D7D7D
+    p
+      margin: 10px auto
+    i
+      font-weight: lighter
+    strong
+      font-style: oblique

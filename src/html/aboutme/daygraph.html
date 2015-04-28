@@ -1,0 +1,22 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">Has my sleep gone up or down recently?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">Has my step count gone up or down recently?</h3>
+      <h3 ng-show="visibleMetric === 'nutrition'">Have I consumed more or less calories recently?</h3>
+      <a class="more-info" ng-click="showModal('has_my_sleep_gone_up_or_down_recently')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="HasMySleepGoneUpOrDown"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div ng-hide="isDefined('sleepChange')" ng-include="'/app/partials/not_enough_data.html'"></div>
+  <div ng-hide="!isDefined('sleepChange')" class="graph-section graph-middle col-sm-6 col-xs-12">
+    <gb-rolling-average-graph></gb-rolling-average-graph>
+  </div>
+  <div class="graph-section graph-right col-sm-3 hidden-xs">
+    <div ng-hide="isDefined('sleepChange')" ng-include="'/app/partials/not_enough_data.html'"></div>
+    <div ng-hide="!isDefined('sleepChange')">
+      <p class="stat-desc">30 day change from {{sleepData.length}} tracked {{visibleMetric}}</p>
+      <div class="circle-stat">{{sleepChange | formatMetricToHuman:visibleMetric}}</div>
+    </div>
+  </div>
+</div>

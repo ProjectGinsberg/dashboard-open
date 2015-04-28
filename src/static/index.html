@@ -1,0 +1,187 @@
+<!doctype html>
+<html ng-app="gb.dashboard">
+  <!--
+  Ginsberg Dashboard v<%= pkg.version %> (<%= gitinfo.local.branch.current.SHA %>)
+  Have a lovely day :) Boom!
+  -->
+  <head>
+	<title>Ginsberg Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/stylesheets/pushy.css">
+	<link rel="stylesheet" href="/stylesheets/hopscotch.min.css">
+	<link rel="stylesheet" href="/stylesheets/dashboard-<%= gitinfo.local.branch.current.SHA %>.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<style>
+		#splash {
+			pointer-events: none;
+			opacity: 0.0;
+			background: white;
+			background-image: url('/images/splash.jpg');
+			background-size: 100% 100%;
+			position:fixed;
+			width:100%;
+			height:100%;
+			top:0px;
+			left:0px;
+			z-index:1000;
+			padding: 20px;
+			color: white;
+			transition: opacity 1s;
+			-webkit-transition: opacity 1s;
+			-moz-transition: opacity 1s;
+			-ms-transition: opacity 1s;
+			-o-transition: opacity 1s;
+		}
+		.loading #splash {
+			opacity: 1.0;
+			display: block !important;
+		}
+	</style>
+	<script>if (!('querySelector' in document && 'localStorage' in window && 'addEventListener' in window)) location.href='https://www.ginsberg.io/sorry/';</script>
+	<!--[if lte IE 10]>
+	<script src="/js/xdomain-0.6.min.js"></script>
+	<script>
+	  xdomain.slaves({
+		'https://sapi.ginsberg.io': '/proxy',
+		'https://api.ginsberg.io': '/proxy',
+		'https://splatform.ginsberg.io': '/proxy',
+		'https://platform.ginsberg.io': '/proxy',
+	  });
+	</script>
+	<![endif]-->
+  </head>
+
+  <body class="loading"  ng-controller="AppController">
+
+	<div id="splash"></div>
+	<login-dialog></login-dialog>
+
+	<!-- Mobile navigation. FIXME: this shouldn't be separate from desktop nav -->
+	<div class="site-overlay"></div>
+	<div class="pushy pushy-left navmenu">
+		<ul>
+			<li ng-class="{ activeNav: isCurrentPath('/home') }"><a href="#/home" analytics-on analytics-event="OpenedHomePage" analytics-category="PageChange" analytics-label="NavClickedHomeMobile">Home</a></li>
+            <li ng-class="{ activeNav: isCurrentPath('/this-week') }"><a href="#/this-week" analytics-on analytics-event="OpenedThisWeek" analytics-category="PageChange" analytics-label="NavClickedThisWeekMobile">This Week</a></li>
+            <li ng-class="{ activeNav: isCurrentPath('/my-graph') }"><a href="#/my-graph" analytics-on analytics-event="OpenedGraph" analytics-category="PageChange" analytics-label="NavClickedEnvMobile">My Graph</a></li>
+			<!--<li ng-class="{ activeNav: isCurrentPath('/day-by-day') }"><a href="#/day-by-day" analytics-on analytics-event="OpenedTable" analytics-category="PageChange" analytics-label="NavClickedTableMobile">Day by Day</a></li>-->
+			<li><a href="#/me/sleep" analytics-on analytics-event="OpenedMeSleepPage" analytics-category="PageChange" analytics-label="NavClickedMeDesktop">About my sleep</a></li>
+			<li><a href="#/me/steps" analytics-on analytics-event="OpenedMeStepsPage" analytics-category="PageChange" analytics-label="NavClickedMeDesktop">About my steps</a></li>
+			<li><a href="#/me/nutrition" analytics-on analytics-event="OpenedMeNutritionPage" analytics-category="PageChange" analytics-label="NavClickedMeDesktop">About my nutrition</a></li>
+			<li ng-class="{ activeNav: isCurrentPath('/account') }"><a href="#/account" analytics-on analytics-event="OpenedAccountPage" analytics-category="PageChange" analytics-label="NavClickedAccountMobile">My Account</a></li>
+			<li ng-class="{ activeNav: isCurrentPath('/connections') }"><a href="#/connections" analytics-on analytics-event="OpenedConnectionsPage" analytics-category="PageChange" analytics-label="NavClickedConnectionsMobile">Connections</a></li>
+			<li><a href="{{env.platform('/account/signout')}}" analytics-on analytics-event="Logout" analytics-category="Logout" analytics-label="NavClickedLogoutMobile">Logout</a></li>
+		</ul>
+	</div>
+	<!-- End of mobile nav -->
+
+	<div id="body-container">
+	  <div id="main">
+		<!-- Environment header to avoid confusion -->
+		<div class="header-notice" ng-class="env.name" ng-cloak ng-show="!env.isProduction">
+			{{env.name}} environment <%= pkg.version %>
+		</div>
+		<!-- Mobile navigation bar -->
+		<div id="mobile-nav" class="gradient-green-blue visible-xs">
+			<a href="//dashboard.ginsberg.io" title="Ginsberg Dashboard"><img alt="Ginsberg Logo" src="/images/logo-mobile.png"/></a>
+			<img class="menu-btn" src="images/menu-icon-white.svg">
+		</div>
+		<!-- Desktop navigation -->
+		<div id="nav" class="gradient-green-blue" ng-class="{reveal: true}">
+			<div class="container out-of-grid-edges">
+				<nav class="navbar our-nav hidden-xs"  role="navigation">
+					<ul class="nav navbar-nav navbar-left" ng-cloak>
+						<li id="nav-home" class="nav-home" ng-class="{ activeNav: isCurrentPath('/home') }"><a class="our-nav-a" href="#/home" analytics-on analytics-event="OpenedHomePage" analytics-category="PageChange" analytics-label="NavClickedHomeDesktop">My Home</a></li>
+                        <li id="nav-this-week" class="nav-reports" ng-class="{ activeNav: isCurrentPath('/this-week') }"><a class="our-nav-a" href="#/this-week" analytics-on analytics-event="OpenedThisWeekPage" analytics-category="PageChange" analytics-label="NavClickedThisWeekDesktop">This Week</a></li>
+                        <li id="nav-my-graph" class="nav-my-graph" ng-class="{ activeNav: isCurrentPath('/my-graph') }"><a class="our-nav-a" href="#/my-graph" analytics-on analytics-event="OpenedGraph" analytics-category="PageChange"  analytics-label="NavClickedGraphDesktop">My Graph</a></li>
+						<!--<li id="nav-reports" class="nav-reports" ng-class="{ activeNav: isCurrentPath('/day-by-day') }"><a class="our-nav-a" href="#/day-by-day" analytics-on analytics-event="OpenedTablePage" analytics-category="PageChange" analytics-label="NavClickedTableDesktop">Day by Day</a></li>-->
+						<li dropdown id="nav-me" class="nav-me" ng-class="{ activeNav: isCurrentPath('/me') }" ng-show="enoughSleepData"><a dropdown-toggle class="our-nav-a" analytics-on analytics-event="OpenedMePage" analytics-category="PageChange" analytics-label="NavClickedMeDesktop" >About Me &nbsp;&nbsp;<span class="badge">now</span></a>
+							<div dropdown-menu id="about-me-dropdown" class="navmenu">
+								<ul>
+									<li><a class="our-nav-a" href="#/me/sleep">Sleep<a></li>
+									<li><a class="our-nav-a" href="#/me/steps">Steps</a></li>
+									<li><a class="our-nav-a" href="#/me/nutrition">Nutrition</a></li>
+									<li><a class="our-nav-a" href="#/me/tags">Tags</a></li>
+								</ul>
+							</div>
+						</li>
+						<li id="nav-me" class="nav-me disabled" ng-show="!enoughSleepData"><a class="our-nav-a" popover-help="You need to log at least 10 days of sleep before you can see this">About Me &nbsp;&nbsp;<span class="badge">soon</span></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" ng-cloak>
+						<li dropdown id="notifications" class="notifications" ng-controller="NotificationController" on-toggle="markNotificationsAsRead(open)" ng-class="{ blink: unreadNotificationCount > 0 }">
+								<a dropdown-toggle ng-hide="unreadNotificationCount > 0" class="our-nav-a no-notifications"><i class="batch-icon bell"></i></a>
+								<a dropdown-toggle ng-show="unreadNotificationCount > 0" class="our-nav-a fully-opaque" analytics-on analytics-event="OpenedNotifications" analytics-category="Notifications">
+									<div id="notification-count">
+										<span class="count">{{ unreadNotificationCount }}</span>
+										<i class="batch-icon bell"></i>
+									</div>
+								</a>
+								<div dropdown-menu id="notification-list">
+									<ul>
+										<li ng-repeat="n in notifications" class="notice" ng-class="{read: n.read}">
+											<div ng-include="'/templates/notifications/tiles/'+n.type+'.html'"></div>
+										</li>
+									</ul>
+								</div>
+								<div ng-if="currentNotification" ng-include="'/app/partials/modals/'+currentNotification.type+'_notification.html'"></div>
+						</li>
+                        <li><a class="our-nav-a" href="{{env.platform('/account/signout')}}" analytics-on analytics-event="Logout" analytics-category="Logout" analytics-label="NavClickedLogout">Logout</a></li>
+						<li id="nav-connections" ng-class="{ activeNav: isCurrentPath('/connections') }"><a class="our-nav-a" href="/#/connections" analytics-on analytics-event="OpenedConnectionsPage" analytics-category="PageChange" analytics-label="NavClickedConnectDesktop">Connections</a></li>
+						<li id="nav-account" ng-class="{ activeNav: isCurrentPath('/account') }"><a class="our-nav-a" href="/#/account" analytics-on analytics-event="OpenedAccountPage" analytics-category="PageChange" analytics-label="NavClickedAccountDesktop">Account</a></li>
+
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- View container -->
+		<div class="container">
+			<div ng-view class="view-frame"></div>
+		</div>
+
+	  </div>
+	</div>
+	<div id="footer-container">
+	  <footer class="site-footer" role="contentinfo">
+		<div class="container">
+		  <div class="row">
+		  	<div class="col-sm-1">
+		  		<a href="//dashboard.ginsberg.io" title="Ginsberg Dashboard"><img alt="Ginsberg Logo" src="/images/logo-beta.png"/></a>
+		  	</div>
+			<div class="site-info col-sm-11">
+			  <div class="social-info" id="feedback">
+				<a href="https://plus.google.com/u/0/b/103882412158029922447"><img src="/images/google-plus.png" /></a>
+				<a href="https://www.facebook.com/projectginsberg"><img src="/images/facebook.png"></a>
+				<a href="https://twitter.com/ginsbergio"><img src="/images/social-twitter.png"></a>
+				<a href="http://ginsberg.uservoice.com/forums/226631-general"><img src="/images/sendfeedback.png"></a>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </footer>
+	</div>
+	<!-- Scripts -->
+	<script type="text/javascript">window.Ginsberg={'version': '<%= gitinfo.local.branch.current.SHA %>'}</script>
+	<script type="text/javascript" src="/js/vendor-<%= gitinfo.local.branch.current.SHA %>.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/js/dashboard-<%= gitinfo.local.branch.current.SHA %>.min.js"></script>
+	<script type="text/javascript" src="/js/templates-<%= gitinfo.local.branch.current.SHA %>.js"></script>
+	<script type="text/javascript" src="/js/dashboard-templates-<%= gitinfo.local.branch.current.SHA %>.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	</script>
+	<script>
+	  UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/3vpRd0r1t5k8Me4nkmLw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+	  UserVoice.push(['set', {
+		accent_color: '#448dd6',
+		trigger_color: 'white',
+		trigger_background_color: 'rgba(46, 49, 51, 0.6)'
+	  }]);
+	  UserVoice.push(['identify', {}]);
+	  UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+	  UserVoice.push(['autoprompt', {}]);
+	</script>
+  </body>
+</html>

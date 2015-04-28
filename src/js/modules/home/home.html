@@ -1,0 +1,250 @@
+<div class="container" hopscotch="introduction" ng-controller="HomeController">
+    <div class="row">
+        <div class="col-md-6">
+            <span class="dateBtn" style="margin-right:10px;" class="button blue-button" ng-click="dateBack()"> <img class="dateBtnImg" src="images/leftc.svg"> </span>
+            <span class="dateHeader">{{viewedDate | date:'EEEE  dd MMM yyyy'}}</span>
+            <span class="dateBtn" style="margin-left:10px;" class="button blue-button" ng-click="dateForward()"> <img class="dateBtnImg" src="images/rightc.svg"> </span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right" id="wellbeing-submit" ng-hide="questionLoading">
+                <button ng-hide="hasRecentWellbeingData" type="button" class="button green-button wellbeingSubmit" ng-click="sendAnswers()" analytics-on analytics-event="WellbeingSubmitted" analytics-category="WellbeingSubmitted" ng-disabled="isSubmitting" analytics-label="">{{isSubmitting | then:"Submitting...":"Submit"}}</button>
+                <button ng-hide="!hasRecentWellbeingData" type="button" class="button blue-button wellbeingUpdate" ng-click="sendAnswers()" ng-disabled="isSubmitting" analytics-on analytics-event="WellbeingSubmitted" analytics-category="WellbeingSubmitted" analytics-label="">{{isSubmitting | then:"Updating...":"Update"}}</button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="homeRule">
+    <div class="row">
+        <div class="col-md-4 col-sm-6 spinner" ng-show="questionLoading" ng-repeat="foo in [1,2,3]"><img src="images/spinner.gif" alt="loading"></div>
+        <div ng-repeat="question in wellbeing_measures" class="col-md-4 col-sm-6">
+            <h4 class="text-center">{{question.question}}</h4>
+            <div class="wellbeingSection">
+                <div ng-repeat="answer in wellbeingAnswers" class="text-center wellbeingAnswer {{answer.class}}" ng-class="{ active: selectedIs(question,answer.score) }" ng-click="setAnswer(question, answer.score)">
+                    <span>{{answer.answer}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="homeRule">
+    <div class="row">
+        <div class="card diaryCard col-md-offset-3 col-md-6">
+            <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-journal.svg" />
+                <span class='padding-left card-title'>Diary</span></div>
+            <div class="diaryContent">
+                <event-editor></event-editor>
+                <div class="tags" ng-show="tags" ng-hide="suggestedTags.length > -1">
+                    <ul>
+                        <li ng-repeat="tag in tags | limitTo:10">
+                            <a class="tag" ng-click="insert(' #' + tag + ' ')">#{{tag}}</a>&nbsp;
+                        </li>
+                    </ul>
+                </div>
+                <div class="tags" ng-show="suggestedTags.length > -1">
+                    <ul>
+                        <li ng-repeat="tag in suggestedTags | limitTo:10">
+                            <a ng-click="complete(tag)"><span class="tag">#{{tag}}</span></a>&nbsp;
+                        </li>
+                    </ul>
+                    <ul ng-show="suggestedTags.length == 0">
+                        <li>No matching tags</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-controller="AlcoholCardController" class="card alcoholCard col-md-4">
+            <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-alcohol.svg" />
+                <span class='padding-left card-title'>Alcohol</span></div>
+            <div class="diaryContent">
+            <div class="item item-body">
+                <div ng-repeat="r in records">
+                    <span>Units of Alcohol</span><span class="pull-right">{{r.units}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+                </div>
+            </div>
+            <div ng-show="showNewRecord === true">
+                <div class="item item-body">
+    				<span class="input-label">Units of Alcohol</span>
+                    <div class="row">
+                        <span class="minUnits pull-left">0</span>
+                        <span class="col-md-10">
+    						<input type="range" min="0" max="35" name="units" ng-model="units">
+    					</span>
+                        <span class="maxUnits pull-right">35</span>
+            		</div>
+                    <div class="item item-input">
+                        <div>
+                            <span class="large-number">{{units}} units</span>
+                            <span>is about the same as</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img style="width:54px;height:54px" src="images/icons/beer.svg" />
+                                <br />
+                                <label>{{getPintsBeer(units)}} pints</label>
+                                <br /><small>of beer</small>
+                            </div>
+                            <div class="col-md-4">
+                                <img style="width:54px;height:54px" src="images/icons/wine.svg" />
+                                <br />
+                                <label>{{getGlassesWine(units)}} glasses</label>
+                                <br /><small>of wine</small>
+                            </div>
+                            <div class="col-md-4">
+                                <img style="width:54px;height:54px" src="images/icons/spirits.svg" />
+                                <br />
+                                <label>{{units}} shots</label>
+                                <br /><small>of spirits</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="addAlcohol" ng-click="newRecord()">Add Alcohol</a>
+            </div>
+            <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="storeAlcohol" ng-click="createRecord()">Store Alcohol</a>
+            </div>
+            </div>
+        </div>
+<div ng-controller="ActivityCardController" class="card exerciseCard col-md-4">
+    <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-exercise.svg" />
+        <span class='padding-left card-title'>Exercise</span></div>
+    <div class="diaryContent">
+        <div class="item item-body">
+            <div ng-repeat="r in records | filter:'!Aggregated' ">
+                <span>Activity</span><span class="pull-right">{{r.activity_type}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+            </div>
+        </div>
+        <div ng-show="showNewRecord === true" class="item item-body">
+            <span class="input-label">Activity</span>
+            <select class="animate-repeat pull-right" ng-model="activityType">
+               <option selected>Walking</option>
+               <option>Running</option>
+               <option>Other Cardio</option>
+               <option>Weight Training</option>
+               <option>Sport</option>
+               <option>Yoga</option>
+               <option>Meditation</option>
+               <option>Cycling</option>
+               <option>Other</option>
+            </select>
+        </div>
+        <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" ng-click="newRecord()">Add Exercise</a>
+        </div>
+        <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" ng-click="createRecord()">Store Exercise</a>
+        </div>
+    </div>
+</div>
+<div ng-controller="SleepCardController" class="card sleepCard col-md-3">
+    <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-sleep.svg" />
+        <span class='padding-left card-title'>Sleep</span></div>
+    <div class="diaryContent">
+        <div class="item item-body">
+            <div ng-repeat="r in records">
+                <span>Sleep</span><span class="pull-right">{{ r.quality | qualityOfSleep }} {{r.total_sleep | hoursAndMinutes}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+            </div>
+        </div>
+        <div ng-show="showNewRecord === true" class="item item-body">
+            <div class="input-field"><span>Sleep Time</span><input class="pull-right" type="time" placeholder="00:00" ng-model="sleepTime"></div>
+            <div class="input-field"><span>Wake Time</span><input class="pull-right" type="time" placeholder="08:00" ng-model="wakeTime"></div>
+            <span class="center-text row item-label">My quality of sleep was</span>
+            <div class="buttons row">
+               <div class="quality-btn col-md-12 float-left">
+                   <button ng-click="sleepQualityClicked('Terrible')" ng-class="sleepQuality !== 'Terrible' ? 'button-outline':''" class="button button-small  button-terrible button-block">Terrible
+                   </button>
+                   <button ng-click="sleepQualityClicked('Bad')" ng-class="sleepQuality !== 'Bad' ? 'button-outline':''" class="button button-small button-bad button-block">Bad
+                   </button>
+                   <button ng-click="sleepQualityClicked('OK')" ng-class="sleepQuality !== 'OK' ? 'button-outline':''" class="button button-small button-ok button-block">Ok
+                   </button>
+                   <button ng-click="sleepQualityClicked('Good')" ng-class="sleepQuality !== 'Good' ? 'button-outline':''" class="button button-small button-good button-block">Good
+                   </button>
+                   <button ng-click="sleepQualityClicked('Great')" ng-class="sleepQuality !== 'Great' ? 'button-outline':''" class="button button-small button-great button-block">Great
+                   </button>
+               </div>
+            </div>
+        </div>
+        <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" id="addSleep" ng-click="newRecord()">Add Sleep</a>
+        </div>
+        <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" id="storeSleep" ng-click="createRecord()">Store Sleep</a>
+        </div>
+    </div>
+</div>
+<div ng-controller="NutritionCardController" class="card nutritionCard col-md-4">
+    <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-nutrition.svg" />
+        <span class='padding-left card-title'>Nutrition</span></div>
+    <div class="diaryContent">
+        <div class="item item-body">
+            <div ng-repeat="r in records">
+                <span>Calories</span><span class="pull-right">{{r.calories}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+            </div>
+        </div>
+        <div ng-show="showNewRecord === true" class="item item-input ">
+             <span class="input-label">Calories</span>
+             <input class="pull-right" type="text" pattern="\d*" placeholder="Enter Calories" ng-model="calories">
+        </div>
+        <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" id="addNutrition" ng-click="newRecord()">Add Nutrition</a>
+        </div>
+        <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+            <a class="btn" id="storeNutrition" ng-click="createRecord()">Store Nutrition</a>
+        </div>
+    </div>
+</div>
+<div ng-hide="true"  class="card weightCard col-md-3">
+    <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-weight.svg" />
+        <span class='padding-left card-title'>Weight</span></div>
+    <div class="diaryContent">
+        <div class="item item-body">
+            <div ng-repeat="r in records">
+                <span>Weight</span><span class="pull-right">{{r.weight}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+            </div>
+        </div>
+        <div ng-show="showNewRecord === true" class="item item-input ">
+             <div class="input-label">Weight</div>
+             <div class="input-field"><input type="text" pattern="\d*" placeholder="Enter weight" ng-model="weight"></div>
+        </div>
+        <div class="item item-body">
+            <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="addWeight" ng-click="newRecord()">Add Weight</a>
+            </div>
+            <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="storeWeight" ng-click="createRecord()">Store Weight</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="StepsCardController" class="card stepsCard col-md-4">
+    <div class="header"> <img class="header-icon" style="width:20px;height:20px" src="images/cards/icon-steps.svg" />
+        <span class='padding-left card-title'>Steps</span></div>
+    <div class="diaryContent">
+        <div class="item item-body">
+            <div ng-repeat="r in records">
+                <span>Steps</span><span class="pull-right">{{r.step_count}} <i ng-click="deleteRecord($index)" class="batch-icon bin"></i></span>
+            </div>
+        </div>
+         <div class="item item-body">
+            <div ng-show="showNewRecord === true" class="item item-input ">
+                 <span class="input-label">Steps</span>
+                 <input class="pull-right" type="text" pattern="\d*" placeholder="Enter steps" ng-model="step_count">
+            </div>
+            <div ng-show="showNewRecord === false" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="addSteps" ng-click="newRecord()">Add Steps</a>
+            </div>
+            <div ng-show="showNewRecord === true" class="item-add" ng-class="{'item item-input item-add' : alcoholRecords.length > 0}">
+                <a class="btn" id="storeSteps" ng-click="createRecord()">Store Steps</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="wellbeing-submit" ng-hide="questionLoading">
+    <button ng-hide="hasRecentWellbeingData" type="button" class="button green-button wellbeingSubmit" ng-click="sendAnswers()" analytics-on analytics-event="WellbeingSubmitted" analytics-category="WellbeingSubmitted" ng-disabled="isSubmitting" analytics-label="">{{isSubmitting | then:"Submitting...":"Submit"}}</button>
+    <button ng-hide="!hasRecentWellbeingData" type="button" class="button blue-button wellbeingUpdate" ng-click="sendAnswers()" ng-disabled="isSubmitting" analytics-on analytics-event="WellbeingSubmitted" analytics-category="WellbeingSubmitted" analytics-label="">{{isSubmitting | then:"Updating...":"Update"}}</button>
+</div>
+</div>

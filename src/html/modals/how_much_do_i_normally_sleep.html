@@ -1,0 +1,16 @@
+<div id="how_much_do_i_normally_sleep" class="modal">
+	<div class="modal-icon"><i class="batch-icon cogs"></i></div>
+	<h1 ng-show="visibleMetric === 'sleep'">How much do I normally sleep?</h1>
+	<h1 ng-show="visibleMetric === 'steps'">How much do I normally walk?</h1>
+	<h1 ng-show="visibleMetric === 'nutrition'">How much do I normally eat?</h1>
+
+	<p ng-show="visibleMetric === 'sleep'">Your average sleep is calculated over the last 7 days. We’ve calculated bounds for your “normal” sleep assuming that you sleep normally 95% of the time.</p>
+	<p ng-show="visibleMetric === 'steps'">Your average step count is calculated over the last 7 days. We’ve calculated bounds for your “normal” step count assuming that it's normal 95% of the time.</p>
+	<p ng-show="visibleMetric === 'nutrition'">Your average calorie count is calculated over the last 7 days. We’ve calculated bounds for your “normal” calorie count assuming that it's normal 95% of the time.</p>
+
+
+	<p>(We’re using the <a href="http://en.wikipedia.org/wiki/Average">average</a> plus or minus two <a href="http://en.wikipedia.org/wiki/Standard_deviation">standard deviations</a>.)</p>
+
+	<br/>
+	<button type="button" class="hide-modal button green-button">Okay, got it</a>
+</div>

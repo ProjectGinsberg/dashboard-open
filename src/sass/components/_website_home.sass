@@ -1,0 +1,111 @@
+.ginsberg-full-page-bg
+  background: url(/images/landing_background.png) no-repeat center center
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+
+.full-width-section
+  text-align: center
+  padding-top: 50px
+  padding-bottom: 50px
+  font-size: 14px
+  h1, h2, h3, h4, h5, h6
+    margin-top: 0.2em
+    margin-bottom: .5em
+    font-weight: normal
+    &.light
+      font-weight: lighter
+  h1
+    font-size: 2.2em
+    font-weight: lighter
+  h2
+    font-size: 2em
+    font-weight: lighter
+  .image-section
+    margin-top: 20px
+  img
+    width: 100%
+    &.smaller-image
+      width: 80%
+      margin: 0 10%
+  .sub-heading
+    margin-top: 10px
+    margin-bottom: .5em
+    font-size: 15px
+    font-weight: bold
+    text-transform: uppercase
+    & + p
+      margin-bottom: 20px
+
+.down-arrow
+  margin-top: 20px
+  display: inline-block
+  width: 60px
+  height: 60px
+  background: transparent url(/images/down_arrow_white.svg) no-repeat center center
+  border: white solid 1px
+  +border-radius(30px)
+
+.home-content
+  font-size: 16px
+  color: white
+  max-width: 850px
+  width: 100%
+  margin: 10px auto
+  .large-button
+    font-size: 16px
+  .button
+    font-size: 12px
+    color: white
+    text-decoration: none
+    border: 1px solid white
+    &:hover
+      background: white
+      color: $gray
+
+.home-top-section
+  margin-top: 50px
+  margin-bottom: 50px
+
+// TODO: Move to new file
+@media (max-width: $screen-xs-max)
+  .container
+    padding-top: 5px
+    padding-left: 5px
+    padding-right: 5px
+
+  .row
+    margin-left: -5px
+    margin-right: -5px
+
+  #chart-objective,
+  .wellbeing-chart,
+  .event-chart
+    padding: 5px
+    font-size: 10px
+
+  .frame .x-axis
+    transform: translateY(235px)
+
+  .wellbeing-chart, #chart-objective, .event-chart
+    .horizontalGrid
+      stroke-dasharray: 1,0
+    .verticalGrid
+      stroke: #f1f7e8
+
+  #datatoggle-subjective
+    .selected-set
+      padding-top: 10px
+      p
+        overflow: hidden
+  .logo
+    margin: 3px 0px 9px 0px !important
+  #nav
+    margin: 0px
+
+// Graph changes
+.frame .x-axis .tick text > tspan:first-child
+    font-weight: bold;
+
+

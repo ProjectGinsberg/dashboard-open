@@ -1,0 +1,10 @@
+<div id="general_notification" class="modal">
+  <div class="modal-icon"><i class="batch-icon cogs"></i></div>
+  <h1>{{currentNotification.title}}</h1>
+  
+  <div ng-bind-html="trusted(currentNotification.body.message)"></div>
+
+  <br/>
+  <button type="button" class="hide-modal button green-button">Okay, got it</button>
+
+</div>

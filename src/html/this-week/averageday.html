@@ -1,0 +1,30 @@
+<div>
+	<h3>Average Per Day</h3>
+
+<div class="averagePerDayMeasure row">
+		<gb-sparkline ds="sleepDataSeries" id="sleepSpark" class="col-md-4 sleep event-chart"></gb-sparkline>
+		<span ng-show="isDefined('sleepMean')" class="col-md-8 sleep">
+			<span  class="value">{{sleepMean | formatMetricToHuman:'sleep'}}</span> <span class="titleText">Sleep</span>
+		</span>
+		<span ng-hide="isDefined('sleepMean')" class='col-md-8'>
+			No sleep data for this week
+		</span>
+</div>
+<div class="averagePerDayMeasure row">
+	<gb-sparkline ds="stepsDataSeries" id="stepsSpark" class="col-md-4 steps event-chart"></gb-sparkline>
+	<span ng-show="isDefined('stepsMean')" class="col-md-8 steps">
+		<span class="value">{{stepsMean | formatMetricToHuman:'steps'}}</span> <span class="titleText">Steps</span>
+	</span>
+	<span ng-hide="isDefined('stepsMean')" class='col-md-8'>
+		No steps data for this week
+	</span>
+</div>
+<div class="averagePerDayMeasure row">
+	<gb-sparkline ds="nutritionDataSeries" id="nutritionSpark" class="col-md-4 nutrition event-chart"></gb-sparkline>
+	<span ng-show="isDefined('nutritionMean')" class="col-md-8 nutrition">
+		<span class="value">{{nutritionMean  | formatMetricToHuman:'nutrition'}}</span> <span class="titleText">Nutrition</span>
+	</span>
+	<span ng-hide="isDefined('nutritionMean')" class='col-md-8'>
+		No nutrition data for this week
+	</span>
+</div>

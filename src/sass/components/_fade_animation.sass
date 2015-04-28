@@ -1,0 +1,81 @@
+$transition_time: 0.4s
+
+.view-container
+  clear: both
+  position: relative
+
+.view-frame.ng-enter, .view-frame.ng-leave
+  background: white
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+
+.view-frame.ng-enter
+  -webkit-animation: $transition_time fade-in
+  -moz-animation: $transition_time fade-in
+  -o-animation: $transition_time fade-in
+  animation: $transition_time fade-in
+  z-index: 100
+
+.view-frame.ng-leave
+  -webkit-animation: $transition_time fade-out
+  -moz-animation: $transition_time fade-out
+  -o-animation: $transition_time fade-out
+  animation: $transition_time fade-out
+  z-index: 99
+
+@keyframes fade-in
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@-moz-keyframes fade-in
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@-webkit-keyframes fade-in
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+
+@keyframes fade-out
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+@-moz-keyframes fade-out
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+@-webkit-keyframes fade-out
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+.repeat-item.ng-enter,
+.repeat-item.ng-leave
+  -webkit-transition: 0.5s linear all
+  transition: 0.5s linear all
+
+.repeat-item.ng-enter,
+.repeat-item.ng-leave.ng-leave-active
+  opacity: 0
+
+.repeat-item.ng-leave,
+.repeat-item.ng-enter.ng-enter-active
+  opacity: 1

@@ -1,0 +1,16 @@
+<div ng-controller="WeightController">
+
+		<div class="input-section">
+			<h3 class="input-heading">Body weight</h3>
+			<div class="input-with-units">
+				<span class="input-units">Kilograms</span>
+				<input ng-model="weight" type="number" min="0" id="weight" class="form-control" />
+			</div>
+		</div>
+		<p class='errorMessage' ng-show="isDefined('error') && error.length > 0">{{error}}</p>
+		<button ng-disabled="submitting" type='button' class="button red-button" ng-click="hide()">Cancel</button>
+		<button ng-disabled="submitting" ng-disabled="exercise_type" ng-click="submit()" type="button" class="button green-button two-buttons">
+			{{submitting | then:"Saving...":"Confirm"}}
+		</button>
+
+</div>

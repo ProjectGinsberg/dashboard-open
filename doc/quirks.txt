@@ -1,0 +1,4 @@
+- XDomain is used for CORS on IE9/10. It needs to be set up for every host you want to communicate with
+- Rollbar defaults the environment to 'platform'. If you're seeing issue there it may indicate a problem occuring before rollbar has been setup.
+- pointer-events:none doesn't work on IE9/10. The standard polyfill doesn't work either because it assumes the page contents are static.
+

@@ -1,0 +1,148 @@
+.errorMessage
+    background-color:$button-red
+    padding:5px
+    color:white
+.homeRule
+    margin-top:30px
+    margin-bottom:30px
+.diaryContent
+    padding-left:5px
+    padding-right:5px
+    margin-top:15px
+.wellbeingSection
+    border:1px solid #ececec
+    border-radius: 5px
+    cursor:default
+
+    .wellbeingAnswer
+        border-top: 1px solid #ececec
+        padding-top: 5px
+        padding-bottom:5px
+    .wellbeingAnswer:first-child
+        border-top: 0px solid #ececec
+
+    .sa
+        &.active
+            background-color:$wellbeingStrongAgreeColour
+            color:white
+        &:not(.active)
+            color:$wellbeingStrongAgreeColour
+    .a
+        &.active
+            background-color:$wellbeingAgreeColour
+            color:white
+        &:not(.active)
+            color:$wellbeingAgreeColour
+    .u
+        &.active
+            background-color:$wellbeingUndecidedColour
+            color:white
+        &:not(.active)
+            color:$wellbeingUndecidedColour
+    .d
+        &.active
+            background-color:$wellbeingDisagreeColour
+            color:white
+        &:not(.active)
+            color:$wellbeingDisagreeColour
+    .sd
+        &.active
+            background-color:$wellbeingStrongDisagreeColour
+            color:white
+        &:not(.active)
+            color:$wellbeingStrongDisagreeColour
+
+.wellbeingSection .wellbeingAnswer:first-child
+        border-top-left-radius:5px
+        border-top-right-radius:5px
+
+.wellbeingSection .wellbeingAnswer:last-child
+        border-bottom-left-radius:5px
+        border-bottom-right-radius:5px
+
+#recent-activity-title
+    text-align:center
+// TODO:DEPRECATED?
+#wellbeing-questions
+  text-align: center
+  .spinner
+    margin: 100px auto
+  .wb-question
+    text-align: center
+    padding: 20px 10px
+    margin-bottom: 20px
+    &.border
+      +box-shadow(0px 0px 5px rgba(0,0,0,.2) )
+      border: 1px solid #ebebeb
+    .dimension
+      font-size: 24px
+      color: #bada83
+      text-transform: uppercase
+    .dimension-image
+      margin-bottom: 20px
+    .context
+      margin: 5px auto
+      font-weight: normal
+      font-size: 16px
+      color: #505050
+      font-style: italic
+    hr
+      margin-top: 20px
+      margin-bottom: 27px
+      width: 70px
+    .questions
+      font-size: 9px
+      color: #999999
+      margin-top: 10px
+      .question
+        display: inline-block
+        vertical-align: top
+        margin-right: 3%
+        @media (max-width: $screen-xs-max)
+          margin-right: 1%
+        p
+          text-transform: uppercase
+          margin: 0 auto
+          width: 55px
+        p.activeoption
+          color: #c9e2a0
+        button
+          background: transparent !important
+          +box-shadow(none)
+          border: none
+        button:focus
+          outline: none
+
+#wellbeing-submit
+  text-align: center
+  @media (max-width: $screen-xs-max)
+    text-align: center
+
+.social-recent-activity
+  td:nth-last-child(2)
+    text-align: left
+  td:last-child
+    width: auto
+
+@media (max-width: $screen-xs-max)
+  #wellbeing-questions
+    .wb-question
+      margin-left: -15px
+      margin-right: -15px
+      .questions
+        margin-left: -20px
+        margin-right: -20px
+.dateHeader
+    font-size: 22px
+    vertical-align:middle
+.dateBtn
+    width:40px
+    height:40px
+    border:1px solid #d4d4d4
+    -webkit-border-radius: 3px
+    -moz-border-radius: 3px
+    border-radius: 3px
+    padding:7px 10px 10px 10px
+
+.dateBtnImg
+    margin:2px

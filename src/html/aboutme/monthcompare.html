@@ -1,0 +1,52 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">How much do I normally sleep?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">How many steps do I normally do?</h3>
+      <h3 ng-show="visibleMetric === 'nutrition'">How many calories do I normally consume?</h3>
+      <a class="more-info" ng-click="showModal('how_much_do_i_normally_sleep')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="HowMuchDoINormallySleep"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+      <div class="border-mask"></div>
+    </div>
+  </div>
+  <div class="graph-section no-border graph-middle col-sm-9 col-xs-12">
+    <div id="sleep-averages">
+      <div class="middle average">
+        <div ng-hide="isDefined('month6Data.mean')" ng-include="'/app/partials/not_enough_data.html'"></div>
+        <div ng-hide="!isDefined('month6Data.mean')">
+          <p ng-show="visibleMetric === 'sleep'" class="stat-desc">In the last 7 days, your <strong>average</strong> sleep was</p>
+          <p ng-show="visibleMetric === 'steps'" class="stat-desc">In the last 7 days, your <strong>average</strong> step count was</p>
+          <p ng-show="visibleMetric === 'nutrition'" class="stat-desc">In the last 7 days, your <strong>average</strong> calorie intake was</p>
+          <div class="circle-stat-container">
+            <div class="circle-stat green-bg">{{month6Data.mean | formatMetricToHuman:visibleMetric}}</div>
+          </div>
+          <div class="fill" style="height: {{month6Data.mean | percentageOf: month6Data.scale}}"></div>
+        </div>
+      </div>
+      <div class="less average">
+        <div ng-hide="isDefined('month6Data.lowPercentile')" ng-include="'/app/partials/not_enough_data.html'"></div>
+        <div ng-hide="!isDefined('month6Data.lowPercentile')">
+          <p  ng-show="visibleMetric === 'sleep'" class="stat-desc">In the last 6 months, you didn't usually sleep <strong>less</strong> than</p>
+          <p  ng-show="visibleMetric === 'steps'" class="stat-desc">In the last 6 months, you didn't usually have a <strong>lower</strong> step count than</p>
+          <p  ng-show="visibleMetric === 'nutrition'" class="stat-desc">In the last 6 months, you didn't usually have a <strong>lower</strong> calorie intake than</p>
+          <div class="circle-stat-container">
+            <div class="circle-stat pink-bg">{{month6Data.lowPercentile  | formatMetricToHuman:visibleMetric}}</div>
+          </div>
+          <div class="fill" style="height: {{month6Data.lowPercentile | percentageOf: month6Data.scale}};"></div>
+        </div>
+      </div>
+      <div class="more average">
+        <div ng-hide="isDefined('month6Data.highPercentile')" ng-include="'/app/partials/not_enough_data.html'"></div>
+        <div ng-hide="!isDefined('month6Data.highPercentile')">
+          <p ng-show="visibleMetric === 'sleep'" class="stat-desc">In the last 6 months, you didn't usually sleep <strong>more</strong> than</p>
+          <p ng-show="visibleMetric === 'steps'" class="stat-desc">In the last 6 months, you didn't usually have a <strong>higher</strong> step count than</p>
+          <p ng-show="visibleMetric === 'nutrition'" class="stat-desc">In the last 6 months, you didn't usually have a <strong>higher</strong> calorie intake than</p>
+          <div class="circle-stat-container">
+            <div class="circle-stat blue-bg">{{month6Data.highPercentile  | formatMetricToHuman:visibleMetric }}</div>
+          </div>
+          <div class="fill" style="height: {{month6Data.highPercentile | percentageOf: month6Data.scale}};"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div id="how_has_my_sleep_changed_over_time" class="modal">
+	<div class="modal-icon"><i class="batch-icon cogs"></i></div>
+	<h1 ng-show="visibleMetric === 'sleep'">How has my sleep changed over time?</h1>
+	<h1 ng-show="visibleMetric === 'steps'">How has my step count changed over time?</h1>
+	<h1 ng-show="visibleMetric === 'nutrition'">How has my calorie consumption changed over time?</h1>
+
+	<p ng-show="visibleMetric === 'sleep'">We’ve calculated your <a href="http://en.wikipedia.org/wiki/Average">average</a> sleep for each of the last four months. This helps you to identify long-term trends.</p>
+	<p ng-show="visibleMetric === 'steps'">We’ve calculated your <a href="http://en.wikipedia.org/wiki/Average">average</a> step count for each of the last four months. This helps you to identify long-term trends.</p>
+	<p ng-show="visibleMetric === 'nutrition'">We’ve calculated your <a href="http://en.wikipedia.org/wiki/Average">average</a> calorie count for each of the last four months. This helps you to identify long-term trends.</p>
+
+	<br/>
+	<button type="button" class="hide-modal button green-button">Okay, got it</a>
+</div>

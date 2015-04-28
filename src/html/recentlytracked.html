@@ -1,0 +1,144 @@
+<div ng-controller="RecentActivityController">
+
+    <div class="row">
+        <div class="col-sm-12">
+        <h2 id="recent-activity-title">Recently tracked</h2>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table recent-activity">
+                <thead>
+                    <th class="title">Sleep</th>
+                    <th>Source</th>
+                    <th>Time slept</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="sleepLoading"><td colspan=4><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="sleep in sleeps | slice:0:5" class="repeat-item">
+                        <td>{{humanReadableDate(sleep)}} </td>
+                        <td>{{sleep.source}}</td>
+                        <td><span class="highlight">{{sleep.total_sleep | toHoursAndMinutes }}</span></td>
+                        <td><a href="" ng-click="deleteSleep(sleep)"  analytics-on analytics-event="DeleteDataSleep" analytics-category="DeleteData" analytics-label=""><i class="batch-icon bin"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="sleepLoading || sleeps" class="no-data-available">You haven't tracked any sleep data yet</div>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table recent-activity">
+                <thead>
+                    <th class="title">Steps</th>
+                    <th>Source</th>
+                    <th>Steps</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="stepCountLoading"><td colspan=5><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="step_count in step_counts | slice:0:5" class="repeat-item">
+                        <td>{{humanReadableDate(step_count)}}</td>
+                        <td>{{step_count.source}}</td>
+                        <td><span class="highlight">{{step_count.step_count | dp:0}}</span></td>
+                        <td><a href="" ng-click="deleteStepCount(step_count)" analytics-on analytics-event="DeleteDataStepCount" analytics-category="DeleteData" analytics-label=""><i class="batch-icon bin"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="stepCountLoading || step_counts" class="no-data-available">You haven't tracked any step count data yet</div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table recent-activity">
+                <thead>
+                    <th class="title">Alcohol</th>
+                    <th>Units</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="alcoholLoading"><td colspan=3><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="event in alcohol | slice:0:5" class="repeat-item">
+                        <td>{{humanReadableDate(event)}}</td>
+                        <td><span class="highlight">{{event.units | dp:0}}</td>
+                        <td><a href="" ng-click="deleteAlcohol(event)"  analytics-on analytics-event="DeleteDataAlcohol" analytics-category="DeleteData" analytics-label=""><i class="batch-icon bin"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="alcoholLoading || alcohol" class="no-data-available">You haven't tracked any alcohol data yet</div>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table recent-activity">
+                <thead>
+                    <th class="title">Exercise</th>
+                    <th>Type</th>
+                    <th class="desktop-only">Source</th>
+                    <th>Cal</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="exercisesLoading"><td colspan=5><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="activity in exercises | slice:0:5" class="repeat-item">
+                        <td>{{humanReadableDate(activity)}}</td>
+                        <td>{{activity.activity_type}}</td>
+                        <td class="desktop-only">{{activity.source}}</td>
+                        <td><span class="highlight">{{activity.calories | dp:0}}</span></td>
+                        <td><a href="" ng-click="deleteExercise(activity)" analytics-on analytics-event="DeleteDataExercise" analytics-category="DeleteData" analytics-label=""><i class="batch-icon bin"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="exercisesLoading || exercises" class="no-data-available">You haven't tracked any exercises data yet</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table recent-activity social-recent-activity">
+                <thead>
+                    <th class="title">Social</th>
+                    <th>Source</th>
+                    <th class="desktop-only">Entry</th>
+                    <th></th>
+                    <th>Posts</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="socialLoading"><td colspan=5><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="posts in social" class="repeat-item">
+                        <td>{{posts.date}}</td>
+                        <td>{{posts.sources}}</td>
+                        <td class="desktop-only">{{posts.first_entry | limitTo:50 }}...</td>
+                        <td colspan=2>
+                            <span ng-show="(posts.size > 1)" class="highlight">+{{posts.size - 1}} more</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="socialLoading || social" class="no-data-available">You haven't tracked any social data yet</div>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table recent-activity">
+                <thead>
+                    <th class="title">Nutrition</th>
+                    <th>Cal</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <tr ng-show="nutritionLoading"><td colspan=3><img src="images/spinner.gif" alt="loading"></td></tr>
+                    <tr ng-repeat="event in nutrition | slice:0:5" class="repeat-item">
+                        <td>{{humanReadableDate(event)}}</td>
+                        <td><span class="highlight">{{event.calories | dp:0}}</span></td>
+                        <td><a href="" ng-click="deleteNutrition(event)"  analytics-on analytics-event="DeleteDataFood" analytics-category="DeleteData" analytics-label=""><i class="batch-icon bin"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="nutritionLoading || nutrition" class="no-data-available">You haven't tracked any nutritional data yet</div>
+        </div>
+    </div>
+</div>

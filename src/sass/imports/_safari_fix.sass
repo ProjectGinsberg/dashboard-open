@@ -1,0 +1,10 @@
+// Fix issue on  various browers which makes the fade effect mess up the viewport perspective
+// Actually this appears to affect Chrome, Safari and IE...
+.view-frame.ng-enter
+  -webkit-animation: none
+
+.view-frame.ng-leave
+  -webkit-animation: none
+
+
+

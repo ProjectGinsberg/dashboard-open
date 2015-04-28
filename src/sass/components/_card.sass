@@ -1,0 +1,110 @@
+$break-small: 900px
+$break-large: 901px
+
+$borderColour: #dddddd
+//Data type color values
+$wellbeingStart:#9BBF5C
+$wellbeingEnd:  #5CBF9B
+
+$journalStart:  #B0A3CC
+$journalMid:    #A890C6
+$journalEnd:    #A07CBF
+
+$sleepStart:    #5CB7BF
+$sleepMid:      #5C9ABF
+$sleepEnd:      #5C7FBF
+
+$stepsStart:    #BFBF5C
+$stepsMid:      #BFB25C
+$stepsEnd:      #BFA65C
+
+$exerciseStart: #5CBF9B
+$exerciseMid:   #5CB6AD
+$exerciseEnd:   #5CADBF
+
+$nutritionStart:#BF975C
+$nutritionMid:  #BF815C
+$nutritionEnd:  #BF695C
+
+$weightStart:   #BF5C5C
+$weightMid:     #BF5C72
+$weightEnd:     #BF5C89
+
+$alcoholStart:  #757575
+$alcoholMid:    #5C5C5C
+$alcoholEnd:    #434343
+
+$socialStart:   #D293B5
+$socialMid:     #D293B5
+$socialEnd:     #D293B5
+
+//Typography colours
+$textDark:      #545454
+$textMid:       #848484
+$textLight:     #A0A0A0
+
+.card
+    border-radius:8px
+    border:1px solid $borderColour
+    box-shadow:0 2px 4px rgba(0,0,0,0.05)
+    margin-bottom:10px
+    margin-right:15px
+    padding-left:0px
+    padding-right:0px
+    .header-icon
+        float:left
+    .header
+        height:36px
+        padding:7px 10px !important
+        border-top-left-radius: 7px
+        border-top-right-radius: 7px
+    .card-title
+        color:white
+        text-transform: uppercase
+        float:left
+        font-weight:600
+        padding-top:1px
+        font-size:15px
+    .input-field
+        padding:5px
+    .item-add
+        text-align:center
+    .minUnits
+        padding-left:30px
+    .maxUnits
+        padding-right:23px
+
+.padding-left
+    padding-left:5px
+//Card header colour styles
+.diaryCard
+    .header
+        background-image:linear-gradient($journalStart, $journalEnd)
+
+.sleepCard
+    .header
+        background-image:linear-gradient($sleepStart, $sleepEnd)
+
+.exerciseCard
+    .header
+        background-image:linear-gradient($exerciseStart, $exerciseEnd)
+
+
+.stepsCard
+    .header
+        background-image:linear-gradient($stepsStart, $stepsEnd)
+
+
+.nutritionCard
+    .header
+        background-image:linear-gradient($nutritionStart, $nutritionEnd)
+
+
+.weightCard
+    .header
+        background-image:linear-gradient($weightStart, $weightEnd)
+
+
+.alcoholCard
+    .header
+        background-image:linear-gradient($alcoholStart, $alcoholEnd)

@@ -1,0 +1,34 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">What do I write about when I sleep well or poorly?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">What do I write about when I step a lot or little?</h3>
+      <h3 ng-show="visibleMetric === 'nutrition'">What do I write about when I eat more or less?</h3>
+
+      <a class="more-info" ng-click="showModal('what_do_i_write_about_when_i_sleep_well_or_poorly')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="WhatDoIWriteAbout"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div ng-hide="top5goodSleepTags.length > 1 && top5badSleepTags.length > 1" ng-include="'/app/partials/not_enough_data.html'"></div>
+  <div ng-hide="!(top5goodSleepTags.length > 1 && top5badSleepTags.length > 1)" class="graph-section graph-middle col-sm-6 col-xs-12">
+    <gb-tags-vs-quality-of-sleep-graph></gb-tags-vs-quality-of-sleep-graph>
+  </div>
+  <div class="graph-section graph-right col-sm-3 col-xs-12">
+    <div ng-hide="top5goodSleepTags.length > 1 && top5badSleepTags.length > 1" ng-include="'/app/partials/not_enough_data.html'"></div>
+    <div ng-hide="!(top5goodSleepTags.length > 1 && top5badSleepTags.length > 1)">
+      <div class="text-center">
+        <i>Tags for more than average {{visibleMetric}}</i>
+        <ul class="word-cloud good-sleeps">
+          <li ng-repeat="tag in top5goodSleepTags" ng-class="{other: (tag[0] == 'other')}" class="count-{{tag[1]}} index-{{$index}}">{{tag[0]}}</li>
+        </ul>
+      </div>
+      <br/>
+      <div class="text-center">
+        <i>Tags for less than average {{visibleMetric}}</i>
+        <ul class="word-cloud bad-sleeps">
+          <li ng-repeat="tag in top5badSleepTags" ng-class="{other: tag[0] == 'other'}" class="count-{{tag[1]}} index-{{$index}}">{{tag[0]}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

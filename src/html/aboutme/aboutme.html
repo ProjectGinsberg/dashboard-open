@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div id="welcome" class="col-sm-8">
+      <h2>All about your {{visibleMetric}}</h2>
+      <p>Learn more about how much you {{visibleMetric}} and what affects your {{visibleMetric}}</p>
+    </div>
+    <div class="pull-right text-right col-sm-4">
+      <div class="row">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div ng-include="modalTemplate()"></div>
+
+<br />
+<div class="row">
+  <month-compare class=".aboutme-row"></month-compare>
+  <day-graph class=".aboutme-row"></day-graph>
+  <change-over-time class=".aboutme-row"></change-over-time>
+  <compare-histogram ng-hide="visibleMetric === 'nutrition'" class=".aboutme-row"></compare-histogram>
+  <affects-this ng-hide="visibleMetric === 'nutrition'" class=".aboutme-row"></affects-this>
+  <writes ng-hide="visibleMetric === 'nutrition'" class=".aboutme-row"></writes>
+  <!--
+  <6monthcompare></6monthcompare>
+  <30daygraph></30daygraph>
+  <changeovertime></changeovertime>
+  <compare></compare>
+  <affectsthis></affectsthis>
+  <writes></writes>
+  -->
+</div>
+<br /><br />

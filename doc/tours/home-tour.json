@@ -1,0 +1,42 @@
+{
+	"path": "/home",
+	"id": "introduction",
+	"steps": [
+		{
+			"title": "Welcome to Ginsberg!",
+			"content": "<p>Hey! Thanks for joining us. Ginsberg aims to help you understand yourself better by tracking what you do and how you feel.</p>",
+			"target": ".logo",
+			"placement": "right"
+		},
+		{
+			"title": "How are you feeling?",
+			"content": "<p>These are the questions you picked during sign-up. Answer them every day to get a handle on how external factors are affecting your mood.</p><p>You can change these at any time from your user preferences.</p>",
+			"target": "#wellbeing-questions",
+			"placement": "bottom",
+			"xOffset": "center",
+			"arrowOffset": "center"
+		},
+		{
+			"title": "Here's the news",
+			"content": "<p>The tables below show data Ginsberg has fetched via your connected services. You can also delete individual data points.</p>",
+			"target": "#recent-activity-title",
+			"placement": "top",
+			"xOffset": "center",
+			"arrowOffset": "center"
+		},
+		{
+			"title": "Get connected!",
+			"content": "<p>You can connect more services here. Ginsberg will fetch data from them automatically.</p>",
+			"target": "#nav-connections",
+			"xOffset": "center",
+			"arrowOffset": "center",
+			"placement": "bottom"
+		},
+		{
+			"title": "Thanks!",
+			"content": "<p>Thanks for taking the Ginsberg tour!</p><p>You can click here to continue the tour, but feel free to explore on your own!</p>",
+			"target": ".nav-my-graph",
+			"placement": "bottom"
+		}
+	]
+}

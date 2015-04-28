@@ -1,0 +1,15 @@
+<div class="container" ng-controller="TodayOnGinsbergController">
+
+<h1>Today on Ginsberg</h1>
+<p>{{sleep.userCount | unit:'user'}} logged sleep data today. The average was {{sleep.mean | toHoursAndMinutes}}.</p>
+<p>{{steps.userCount | unit:'user'}} logged steps today. The average was {{steps.mean | unit:'step'}}.</p>
+<p>{{alcohol.userCount | unit:'user'}} logged alcohol in the last 24 hours. The average was {{alcohol.mean | unit:'unit'}}.</p>
+<p>{{wellbeing.userCount | unit:'user'}} logged wellbeing data today.</p>
+
+<h1>This week on Ginsberg</h1>
+<p>{{weekly.sleep.userCount | unit:'user'}} logged sleep data this week. The average was {{weekly.sleep.mean | toHoursAndMinutes}}.</p>
+<p>{{weekly.steps.userCount | unit:'user'}} logged steps this week. The average was {{weekly.steps.mean | unit:'step'}}.</p>
+<p>{{weekly.alcohol.userCount | unit:'user'}} logged alcohol this week. The average was {{weekly.alcohol.mean | unit:'unit'}}.</p>
+<p>{{weekly.wellbeing.userCount | unit:'user'}} logged wellbeing data this week.</p>
+
+</div>

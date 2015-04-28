@@ -1,0 +1,13 @@
+Title: Welcome to Ginsberg Release 1.7
+
+The highlight for this fortnight's release is our new events hashtag table. Rather than describing it, why not try it out? Add some events on the graph page and click on the dots on the events line.
+
+The rest of the new features are:
+
+* 'What affects my sleep' panel at the bottom of the 'About Me' page is now functional
+See correlations between your sleep and other aspects of your life at the bottom of the ['About Me' page](https://dashboard.project-ginsberg.com/#/me)
+* Missing data on the wellbeing chart now draws a straight line from last point (rather than default to 3)
+* EU Cookie Directive added
+* Sleep import fixed for Jawbone Up users
+
+Things in the Ginsberg office are hotting up as we're planning to do another release at the end of this week which will see an updated Connections page. Keep an eye out for it!

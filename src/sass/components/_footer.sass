@@ -1,0 +1,57 @@
+// sticky footer
+$footer_height: 60px
+$footer-bg-color: #303030
+
+html,body
+	height: 100%
+
+#body-container
+	min-height: 100%
+
+#main
+	//overflow: auto
+	padding-bottom: $footer_height
+
+#footer-container
+	z-index: 0
+	position: relative
+	margin-top: -$footer_height
+	height: $footer_height
+	background-color: $footer-bg-color
+	clear: both
+	+clearfix
+
+/*Opera Fix*/
+body:before
+	content: ""
+	height: 100%
+	float: left
+	width: 0
+	margin-top: -32767px
+
+.footer
+	position: fixed
+	right: 0
+	left: 0
+	bottom: 0
+	z-index: 1000
+
+.site-footer
+	background-color: $footer-bg-color
+	color: $white
+	padding-top: 10px
+	padding-bottom: 10px
+	+clearfix
+	img
+		height: 40px
+	.social-info
+		padding-right: 30px
+		float: right
+
+@media (max-width: $screen-xs-max)
+	.site-footer
+		padding: 0px
+		.social-info
+			text-align: center
+			float: none
+			line-height: 50px

@@ -1,0 +1,53 @@
+<div id="charts">
+	<div class="table-container" period-selection ng-controller="DayByDayController">
+		<div id="chart-button-container">
+			<button type="button" id="prev-period-button" class="button" ng-click="selectPreviousPeriod()"></button>
+			<button type="button" id="next-period-button" class="button" ng-click="selectNextPeriod()" ng-show="hasNextPeriod()"></button>
+		</div>
+		<table id="thetable" class="table table-striped">
+			<thead>
+				<tr><th>&nbsp;</th>
+					<th ng-repeat="day in periodSelection()">
+						{{day | date:'EEE'}}
+						<br /><em class="date">{{day | date:'MMM dd'}}</em>
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<th>Sleep</th>
+					<td ng-repeat="day in periodSelection()">{{sleep.data[$index] | datapoint | hoursAndMinutes }}</td>
+				</tr>
+				<tr>
+					<th>Sleep Quality</th>
+					<td ng-repeat="day in periodSelection()">{{sleepQuality[$index] | sleepQuality}}</td>
+				</tr>
+				<tr>
+					<th>Steps</th>
+					<td ng-repeat="day in periodSelection()">{{steps.data[$index] | datapoint:'step'}}</td>
+				</tr>
+				<tr>
+					<th>Alcohol</th>
+					<td ng-repeat="day in periodSelection()">{{alcohol.data[$index] | datapoint:'unit'}}</td>
+				</tr>
+				<tr>
+					<th>Exercise</th>
+					<td ng-repeat="day in periodSelection()">{{exercise.data[$index] | datapoint:'activity':'activities'}}</td>
+				</tr>
+				<tr>
+					<th>Social</th>
+					<td ng-repeat="day in periodSelection()">{{social.data[$index] | datapoint:'post'}}</td>
+				</tr>
+				<tr>
+					<th>Nutrition</th>
+					<td ng-repeat="day in periodSelection()">{{nutrition.data[$index] | datapoint:'calorie'}}</td>
+				</tr>
+				<tr>
+					<th>Tags</th>
+					<td ng-repeat="day in periodSelection()"><span class="tag" ng-repeat="tag in tags[$index]">#{{tag}}</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

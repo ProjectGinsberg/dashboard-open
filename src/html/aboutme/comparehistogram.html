@@ -1,0 +1,43 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">How does my sleep compare to other Ginsberg users?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">How does my step count compare to other Ginsberg users?</h3>
+      <a class="more-info" ng-click="showModal('how_does_my_sleep_compare_to_other_ginsberg_users')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="HowDoesMySleepCompareToOtherUsers"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div ng-hide="isDefined('userAverageForComparison')" ng-include="'/app/partials/not_enough_data.html'"></div>
+  <div ng-hide="!isDefined('userAverageForComparison')" class="graph-section graph-middle col-sm-6 col-xs-12">
+    <gb-average-comparison-histogram></gb-average-comparison-histogram>
+  </div>
+  <div class="graph-section graph-right col-sm-3 hidden-xs">
+    <div ng-hide="isDefined('mean')" ng-include="'/app/partials/not_enough_data.html'"></div>
+    <div ng-hide="!isDefined('mean')">
+      <div class="vertical-line-container">
+        <div class="vertical-line">
+          <div class="circle-stat green middle-positioned-stat">{{ mean | formatMetricToHuman:visibleMetric}}</div>
+        </div>
+      </div>
+      <div class="overlapping-stacked-stats-container">
+        <div class="overlapping-stacked-stats top">
+          <p ng-show="visibleMetric === 'sleep'" class="stat-desc">Ginsberg users who sleep <strong>less</strong> than you</p>
+
+          <p ng-show="visibleMetric === 'steps'" class="stat-desc">Ginsberg users who have a <strong>lower</strong> step count than you</p>
+          <div class="circle-stat">{{lessThanUserAverage | percent}}</div>
+        </div>
+        <div class="overlapping-stacked-stats middle">
+          <p ng-show="visibleMetric === 'sleep'" class="stat-desc">Ginsberg users who sleep <strong>similarly</strong> to you</p>
+          <p ng-show="visibleMetric === 'steps'" class="stat-desc">Ginsberg users who have a <strong>similar</strong> step count  to you</p>
+
+          <div class="circle-stat">{{similarToUserAverage | percent}}</div>
+        </div>
+        <div class="overlapping-stacked-stats bottom">
+          <p ng-show="visibleMetric === 'sleep'" class="stat-desc">Ginsberg users who {{visibleMetric}} <strong>more</strong> than you</p>
+          <p ng-show="visibleMetric === 'steps'" class="stat-desc">Ginsberg users who have a <strong>higher</strong> step count than you</p>
+          <div class="circle-stat">{{moreThanUserAverage | percent}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

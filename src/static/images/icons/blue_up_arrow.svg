@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg width="17.5" height="21.5" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+ <g>
+  <title>Layer 1</title>
+  <g transform="rotate(-180 8.749999046325684,10.750000953674316) " id="Shape_3">
+   <g id="svg_1">
+    <polygon id="svg_2" points="12.972,9.848 12.972,-0.002 4.528,-0.002 4.528,9.848    -0.001,9.848 8.75,21.502 17.501,9.848" fill="#5CB6BF" clip-rule="evenodd" fill-rule="evenodd"/>
+   </g>
+  </g>
+ </g>
+</svg>

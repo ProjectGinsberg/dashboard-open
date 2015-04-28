@@ -1,0 +1,46 @@
+<div class="graph-row">
+  <div class="graph-section graph-left col-sm-3 col-xs-12">
+    <div class="container">
+      <h3 ng-show="visibleMetric === 'sleep'">What affects my sleep?</h3>
+      <h3 ng-show="visibleMetric === 'steps'">What affects my step count?</h3>
+      <h3 ng-show="visibleMetric === 'nutrition'">What affects my nutrition?</h3>
+
+      <a class="more-info" ng-click="showModal('what_affects_my_sleep')" analytics-on analytics-event="AboutMeModalClicked" analytics-category="ModalClicked" analytics-label="WhatAffectsMySleep"><span class="question-bubble"></span>Where do these numbers come from?</a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div ng-hide="isDefined('insights')" ng-include="'/app/partials/not_enough_data.html'"></div>
+  <div ng-hide="!isDefined('insights')" class="graph-section graph-middle col-sm-6 col-xs-12">
+    <div id="correlations-carousel-container">
+      <ul id="correlations-carousel">
+        <li ng-repeat="i in insights" data-index="{{$index}}">
+          <p class="insight" ng-bind-html="trusted(i.body.insight)"></p>
+        </li>
+      </ul>
+      <div id="correlations-carousel-controls">
+        <a class="button" ng-click="prevItem()" analytics-on analytics-event="CorrelationsClicked" analytics-category="CorrelationsPrev">&lt;</a>
+        <a class="button" ng-click="nextItem()" analytics-on analytics-event="CorrelationsClicked" analytics-category="CorrelationsNext">&gt;</a>
+      </div>
+    </div>
+  </div>
+  <div class="graph-section graph-right col-sm-3 hidden-xs">
+    <div ng-hide="isDefined('insights')" ng-include="'/app/partials/not_enough_data.html'"></div>
+    <div id="correlations-rating" class="text-center" ng-hide="!isDefined('insights')">
+      <h4>Was this useful to you?</h4>
+      <h5 class="answer-preview">&nbsp;{{correlationRatingsScale[currentInsight.hoverRating-1].preview}}&nbsp;</h5>
+      <div class="correlation-rating">
+        <div class="rating-button-line"></div>
+        <div class="rating-container">
+          <label ng-repeat="rating in correlationRatingsScale" ng-mouseenter="setInsightRating(rating.value)" ng-mouseleave="currentInsight.hoverRating = currentInsight.rating" ng-click="submitCurrentInsight()">
+          <input type="radio" ng-model="currentInsight.rating" value="{{rating.value}}">
+          <span class="radio-button"><span class="select {{rating.colour}}"></span></span>
+          </label>
+        </div>
+        <div class="rating-labels">
+          <span class="name">{{correlationRatingsScale[0].answer}}</span>
+          <span class="name">{{correlationRatingsScale[correlationRatingsScale.length -1].answer}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

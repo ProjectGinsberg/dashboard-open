@@ -1,0 +1,14 @@
+<div id="wellbeing-questions">
+	<div class="wb-question">
+		<p class="context">"{{wellbeing.question}}&hellip;"</p>
+		<div class="questions">
+			<div class="question" ng-repeat="answer in ['Strongly disagree', 'Disagree', 'Undecided', 'Agree', 'Strongly agree']">
+				<button ng-click="answerSelection($index)" 
+          analytics-on analytics-event="WellbeingClicked" analytics-category="WellbeingClicked" analytics-label="{{wellbeing.question}}">
+          <span class="nice-radio-button"><span ng-show="answerSelection()==$index" class="select green on"></span></span>
+        </button>
+        <p ng-class="{ activeOption: (answerSelection()==$index) } ">{{answer}}</p>
+      </div>
+		</div>
+	</div>
+</div>

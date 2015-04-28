@@ -1,0 +1,16 @@
+<div id="how_does_my_sleep_compare_to_other_ginsberg_users" class="modal">
+	<div class="modal-icon"><i class="batch-icon cogs"></i></div>
+	<h1>How does my sleep compare to other Ginsberg users?</h1>
+	<h1 ng-show="visibleMetric === 'sleep'">How does my sleep compare with other Ginsberg users?</h1>
+	<h1 ng-show="visibleMetric === 'steps'">How does my step count compare with other Ginsberg users?</h1>
+	<h1 ng-show="visibleMetric === 'nutrition'">How does my calorie consumption comapre with other Ginsberg users?</h1>
+
+	<p ng-show="visibleMetric === 'sleep'">The <a href="http://en.wikipedia.org/wiki/Histogram">histogram chart</a> shows how much all Ginsberg users have been sleeping over the last three months. Each bar represents the number of logged sleeps with that amount of time. The higher the bar for a given amount of sleep, the more Ginsberg users slept for that length of time.</p>
+	<p ng-show="visibleMetric === 'steps'">The <a href="http://en.wikipedia.org/wiki/Histogram">histogram chart</a> shows how many steps Ginsberg users have logged over the last three months. The higher the bar for a given amount of steps, the more users logged that step count.</p>
+	<p ng-show="visibleMetric === 'nutrition'">The <a href="http://en.wikipedia.org/wiki/Histogram">histogram chart</a> shows how many calores Ginsberg users have been consuming over the last three months. The higher the bar for a given amount of calories, the more users logged that number over the course of a day.</p>
+
+	<p>The highlighted bar is the one that contains your average.</p>
+
+	<br/>
+	<button type="button" class="hide-modal button green-button">Okay, got it</a>
+</div>

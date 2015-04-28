@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div id="welcome" class="col-sm-5">
+      <h2>Your monthly check-up results</h2>
+      <p>Here's how your wellbeing has changed since last month.</p>
+    </div>
+    <div class="col-sm-7 text-right">
+      <div class="check-up-container">
+        <div class="check-up-score-title">
+          <h3>Your Monthly Check-up Score</h3>
+          <p>
+            <span class="dot blue"></span><span class="legend-text blue">Your History</span>
+            <span class="dot green"></span><span class="legend-text green">Ginsberg Average</span>
+          </p>
+        </div>
+        <div class="check-up-score">
+          <div class="check-up-graph">
+            <img src="images/spinner.gif" class="loading" alt="loading" ng-show="loading">
+            <gb-survey-results-graph question="all" id="questionall" ng-hide="loading"></gb-survey-results-graph>
+          </div>
+          <div class="score">
+            <p>Most Recent</p>
+            <p class="num">{{questionall.user.data[questionall.user.data.length-1].v || "?"}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row survey-results">
+
+    <div class="loading-box" ng-show="!questions">
+      <br/>
+      <br/>
+      <br/>
+      <img src="images/spinner.gif" alt="loading">
+      <br/>
+      <br/>
+      <br/>
+    </div>
+
+    <div class="survey-result" ng-repeat="q in questions" ng-hide="!questions">
+      <h4 class="title">{{q.title}}</h4>
+      <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+        <div class="flipper">
+          <div class="front">
+            <div class="result-circles">
+              <div class="left-circle">
+                <div class="middle">
+                  <p><i>{{q.lastAnswer.date}}</i></p>
+                  <p class="uppercase"><strong>{{q.lastAnswer.answer}}</strong></p>
+                </div>
+              </div>
+              <div class="main-circle">
+                <div class="middle">
+                  <p><i>{{q.thisAnswer.date}}</i></p>
+                  <h5 class="latest-answer {{q.changeType}}">{{q.thisAnswer.answer}}</h5>
+                  <img ng-show="q.change < 0" class="arrow" alt="survey arrow" src="/images/icons/pink_down_arrow.svg" />
+                  <img ng-show="q.change > 0" class="arrow" alt="survey arrow" src="/images/icons/green_up_arrow.svg" />
+                  <img ng-show="q.change == 0" class="arrow" alt="survey arrow" src="/images/icons/blue_sideways_arrow.svg" />
+                  <p><i>Change of</i></p>
+                  <p><strong>{{q.change || '0'}} Point{{ (q.change == 1) | then:"":"s"}}</strong></p>
+                </div>
+              </div>
+              <div class="right-circle">
+                <div class="middle">
+                  <p><i>Ginsberg Avg</i></p>
+                  <p><strong>{{q.ginsbergAverage | dp:1}} Points</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <img src="images/spinner.gif" alt="loading" ng-show="loading">
+            <gb-survey-results-graph ng-hide="loading" question="{{q.id}}" id="question{{q.id}}"></gb-survey-results-graph>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
